@@ -1,4 +1,4 @@
-package org.example;
+package cl.usach;
 
 public class Main {
     public static void main(String[] args) {
