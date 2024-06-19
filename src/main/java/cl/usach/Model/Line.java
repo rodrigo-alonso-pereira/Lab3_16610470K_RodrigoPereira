@@ -49,6 +49,14 @@ public class Line {
     }
 
     // Metodos Propios Line
+    public int lineLength() {
+        int length = 0;
+        for (Section section : sections) {
+            length = section.getDistance() + length;
+        }
+        return  length;
+    }
+
     public void lineAddSection(Section section) {
         sections.add(section);
     }
