@@ -48,6 +48,11 @@ public class Line {
         this.sections = sections;
     }
 
+    // Metodos Propios Line
+    public void lineAddSection(Section section) {
+        sections.add(section);
+    }
+
     @Override
     public String toString() {
         return "Line{" +
