@@ -52,9 +52,17 @@ public class Line {
     public int lineLength() {
         int length = 0;
         for (Section section : sections) {
-            length = section.getDistance() + length;
+            length += section.getDistance();
         }
         return  length;
+    }
+
+    public int lineCost() {
+        int cost = 0;
+        for (Section section : sections) {
+            cost += section.getCost();
+        }
+        return cost;
     }
 
     public void lineAddSection(Section section) {
