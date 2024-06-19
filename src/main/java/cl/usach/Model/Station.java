@@ -3,11 +3,10 @@ package cl.usach.Model;
 public class Station {
     private int id;
     private String name;
-    // TODO: Crear ENUM de stationType
-    private String stationType;
+    private StationType stationType;
     private int stopTime;
 
-    public Station(int id, String name, String stationType, int stopTime) {
+    public Station(int id, String name, StationType stationType, int stopTime) {
         this.id = id;
         this.name = name;
         this.stationType = stationType;
@@ -30,11 +29,11 @@ public class Station {
         this.name = name;
     }
 
-    public String getStationType() {
+    public StationType getStationType() {
         return stationType;
     }
 
-    public void setStationType(String stationType) {
+    public void setStationType(StationType stationType) {
         this.stationType = stationType;
     }
 
