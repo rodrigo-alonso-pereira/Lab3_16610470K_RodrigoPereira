@@ -49,6 +49,11 @@ public class Line {
     }
 
     // Metodos Propios Line
+se
+    /**
+     *
+     * @return
+     */
     public int lineLength() {
         int length = 0;
         for (Section section : sections) {
@@ -57,6 +62,10 @@ public class Line {
         return  length;
     }
 
+    /**
+     *
+     * @return
+     */
     public int lineCost() {
         int cost = 0;
         for (Section section : sections) {
@@ -65,6 +74,10 @@ public class Line {
         return cost;
     }
 
+    /**
+     *
+     * @param section
+     */
     public void lineAddSection(Section section) {
         sections.add(section);
     }
