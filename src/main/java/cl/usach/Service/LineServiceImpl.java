@@ -2,7 +2,7 @@ package cl.usach.Service;
 
 import cl.usach.Model.Line;
 
-public class LineServiceImpl extends LineService{
+public class LineServiceImpl implements LineService {
 
     @Override
     public int lineSectionLength(String StationName1, String StationName2) {
