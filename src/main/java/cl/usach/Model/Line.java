@@ -1,6 +1,7 @@
 package cl.usach.Model;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Line {
 
@@ -63,6 +64,26 @@ public class Line {
         return length;
         //return  sections.size();
     }
+
+    /**
+     *
+     * @param StationName1
+     * @param StationName2
+     * @return
+     */
+    public int lineSectionLength(String StationName1, String StationName2) {
+        var flag = true;
+        var distance = 0;
+        for (Section section : sections) {
+            if (Objects.equals(section.getPoint1().getName(), StationName1) && flag) {
+                distance += section.getDistance();
+            } else if (Objects.equals(section.getPoint2().getName(), StationName2)) {
+                flag = false;
+            }
+        }
+        return distance;
+    }
+
     /**
      *
      * @return
