@@ -96,6 +96,19 @@ public class Line {
         return cost;
     }
 
+    public int lineSectionCost(String StationName1, String StationName2) {
+        var flag = true;
+        var cost = 0;
+        for (Section section : sections) {
+            if (Objects.equals(section.getPoint1().getName(), StationName1) && flag) {
+                cost += section.getCost();
+            } else if (Objects.equals(section.getPoint2().getName(), StationName2)) {
+                flag = false;
+            }
+        }
+        return cost;
+    }
+
     /**
      *
      * @param section
