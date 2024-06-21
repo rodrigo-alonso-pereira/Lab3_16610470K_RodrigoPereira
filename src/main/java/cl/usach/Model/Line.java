@@ -96,6 +96,12 @@ public class Line {
         return cost;
     }
 
+    /**
+     *
+     * @param StationName1
+     * @param StationName2
+     * @return
+     */
     public int lineSectionCost(String StationName1, String StationName2) {
         var flag = true;
         var cost = 0;
