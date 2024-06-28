@@ -10,10 +10,10 @@ public class LineServiceImpl implements LineService {
 
     @Override
     public boolean isLine(Line line) {
-        List<Integer> idList = line.getSections().stream()
+        /*List<Integer> idList = line.getSections().stream()
                 .flatMap(Collection::stream)
                 .map(ob->(Integer)ob)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());*/
         return false;
     }
 }
