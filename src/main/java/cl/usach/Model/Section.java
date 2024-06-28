@@ -4,10 +4,10 @@ public class Section {
 
     private Station point1;
     private Station point2;
-    private int distance;
+    private double distance;
     private int cost;
 
-    public Section(Station point1, Station point2, int distance, int cost) {
+    public Section(Station point1, Station point2, double distance, int cost) {
         this.point1 = point1;
         this.point2 = point2;
         this.distance = distance;
@@ -30,11 +30,11 @@ public class Section {
         this.point2 = point2;
     }
 
-    public int getDistance() {
+    public double getDistance() {
         return distance;
     }
 
-    public void setDistance(int distance) {
+    public void setDistance(double distance) {
         this.distance = distance;
     }
 
