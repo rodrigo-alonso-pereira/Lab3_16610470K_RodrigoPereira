@@ -35,14 +35,17 @@ public class Main {
         Section s7 = new Section(st7, st8, 3, 20);
 
         //Datos para crear lines
-        ArrayList<Section> sectionListLine0 = new ArrayList<>(Arrays.asList(s0, s1, s2, s3, s4, s5, s6, s7));
-        Line line0 = new Line(0, "Línea 0", "UIC 60 ASCE", null);
-        Line line1 = new Line(1, "Línea 1", "100 R.E.", sectionListLine0);
+        ArrayList<Section> sectionListLine0 = new ArrayList<>();
+        ArrayList<Section> sectionListLine1 = new ArrayList<>(Arrays.asList(s0, s1, s2, s3, s4, s5, s6, s7));
+        Line line0 = new Line(0, "Línea 0", "UIC 60 ASCE", sectionListLine0);
+        Line line1 = new Line(1, "Línea 1", "100 R.E.", sectionListLine1);
 
-        //Testeo lineLength
+        //Testeo de metodos de line
         System.out.println(line1.lineLength()); //18.4
         System.out.println(line1.lineSectionLength("San Alberto Hurtado", "La Moneda")); //13.4
         System.out.println(line1.lineCost()); //335
         System.out.println(line1.lineSectionCost("San Alberto Hurtado", "La Moneda")); //275
+        line0.lineAddSection(s0);
+        System.out.println(line0.toString());
     }
 }
