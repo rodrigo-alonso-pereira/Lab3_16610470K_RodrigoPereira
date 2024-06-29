@@ -1,7 +1,12 @@
 package cl.usach;
 
+import cl.usach.Model.Line;
 import cl.usach.Model.Section;
 import cl.usach.Model.Station;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static cl.usach.Model.StationType.*;
 
@@ -29,7 +34,12 @@ public class Main {
         Section s6 = new Section(st6, st7, 2, 40);
         Section s7 = new Section(st7, st8, 3, 20);
 
+        //Datos para crear lines
+        ArrayList<Section> sectionListLine0 = new ArrayList<>(Arrays.asList(s0, s1, s2, s3, s4, s5, s6, s7));
+        Line line0 = new Line(0, "Línea 0", "UIC 60 ASCE", null);
+        Line line1 = new Line(1, "Línea 1", "100 R.E.", sectionListLine0);
 
-        System.out.println(s7.toString());
+
+        System.out.println(line1.toString());
     }
 }
