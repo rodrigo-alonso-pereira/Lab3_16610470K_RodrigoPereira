@@ -39,7 +39,8 @@ public class Main {
         Line line0 = new Line(0, "Línea 0", "UIC 60 ASCE", null);
         Line line1 = new Line(1, "Línea 1", "100 R.E.", sectionListLine0);
 
+        //Testeo lineLength
+        System.out.println(line1.lineLength()); //18.4
 
-        System.out.println(line1.toString());
     }
 }

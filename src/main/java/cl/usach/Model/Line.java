@@ -56,8 +56,8 @@ public class Line {
      * @return
      */
     //TODO: Averiguar si es total distancia o total estaciones
-    public int lineLength() {
-        int length = 0;
+    public double lineLength() {
+        double length = 0;
         for (Section section : sections) {
             length += section.getDistance();
         }
@@ -71,9 +71,9 @@ public class Line {
      * @param StationName2
      * @return
      */
-    public int lineSectionLength(String StationName1, String StationName2) {
+    public double lineSectionLength(String StationName1, String StationName2) {
         var flag = true;
-        var distance = 0;
+        var distance = 0.0;
         for (Section section : sections) {
             if (Objects.equals(section.getPoint1().getName(), StationName1) && flag) {
                 distance += section.getDistance();
