@@ -72,13 +72,15 @@ public class Line {
      * @return
      */
     public double lineSectionLength(String StationName1, String StationName2) {
-        var flag = true;
+        var flag = false;
         var distance = 0.0;
         for (Section section : sections) {
-            if (Objects.equals(section.getPoint1().getName(), StationName1) && flag) {
-                distance += section.getDistance();
-            } else if (Objects.equals(section.getPoint2().getName(), StationName2)) {
+            if (Objects.equals(section.getPoint2().getName(), StationName2)) {
                 flag = false;
+                distance += section.getDistance();
+            } else if (Objects.equals(section.getPoint1().getName(), StationName1) || flag) {
+                flag = true;
+                distance += section.getDistance();
             }
         }
         return distance;
