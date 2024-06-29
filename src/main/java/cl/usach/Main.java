@@ -42,5 +42,6 @@ public class Main {
         //Testeo lineLength
         System.out.println(line1.lineLength()); //18.4
         System.out.println(line1.lineSectionLength("San Alberto Hurtado", "La Moneda")); //13.4
+        System.out.println(line1.lineCost()); //335
     }
 }
