@@ -3,10 +3,10 @@ package cl.usach;
 import cl.usach.Model.Line;
 import cl.usach.Model.Section;
 import cl.usach.Model.Station;
+import cl.usach.Service.LineServiceImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static cl.usach.Model.StationType.*;
 
@@ -47,5 +47,9 @@ public class Main {
         System.out.println(line1.lineSectionCost("San Alberto Hurtado", "La Moneda")); //275
         line0.lineAddSection(s0);
         System.out.println(line0.toString());
+        System.out.println(line1.toString());
+
+        LineServiceImpl lineService = new LineServiceImpl();
+        System.out.println(lineService.isLine(line1));
     }
 }
