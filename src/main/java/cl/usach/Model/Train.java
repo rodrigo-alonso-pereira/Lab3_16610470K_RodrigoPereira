@@ -1,16 +1,15 @@
 package cl.usach.Model;
 
-import java.util.List;
-
+import java.util.ArrayList;
 public class Train {
 
     private int id;
     private String trainMaker;
     private int speed;
     private int stationStayTime;
-    private List<PassengerCar> carList;
+    private ArrayList<PassengerCar> carList;
 
-    public Train(int id, String trainMaker, int speed, int stationStayTime, List<PassengerCar> carList) {
+    public Train(int id, String trainMaker, int speed, int stationStayTime, ArrayList<PassengerCar> carList) {
         this.id = id;
         this.trainMaker = trainMaker;
         this.speed = speed;
@@ -50,11 +49,11 @@ public class Train {
         this.stationStayTime = stationStayTime;
     }
 
-    public List<PassengerCar> getCarList() {
+    public ArrayList<PassengerCar> getCarList() {
         return carList;
     }
 
-    public void setCarList(List<PassengerCar> carList) {
+    public void setCarList(ArrayList<PassengerCar> carList) {
         this.carList = carList;
     }
 
