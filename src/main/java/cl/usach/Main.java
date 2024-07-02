@@ -1,14 +1,18 @@
 package cl.usach;
 
 import cl.usach.Model.Line;
+import cl.usach.Model.PassengerCar;
 import cl.usach.Model.Section;
 import cl.usach.Model.Station;
 import cl.usach.Service.LineServiceImpl;
+import cl.usach.Model.CarType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import static cl.usach.Model.StationType.*;
+import static cl.usach.Model.CarType.*;
+import static cl.usach.Model.StationType.TERMINAL;
 
 public class Main {
     public static void main(String[] args) {
@@ -51,5 +55,28 @@ public class Main {
 
         LineServiceImpl lineService = new LineServiceImpl();
         System.out.println(lineService.isLine(line1));
+
+        /**
+         * pcar(0, 90, "NS-74", CT, PC0),
+         * pcar(1, 100, "NS-74", TR, PC1),
+         * pcar(2, 150, "NS-74", TR, PC2),
+         * pcar(3, 90, "NS-74", CT, PC3),
+         * pcar(4, 100, "AS-2014", CT, PC4),
+         * pcar(5, 100, "AS-2014", CT, PC5),
+         * pcar(6, 100, "AS-2016", CT, PC6),
+         * pcar(7, 120, "NS-74", TR, PC7),
+         * pcar(8, 150, "NS-74", TR, PC8),
+         */
+
+        PassengerCar pc0 = new PassengerCar(0, 90, "NS-74", "CAF", CarType.TERMINAL);
+        PassengerCar pc1 = new PassengerCar(1, 100, "NS-74", "CAF", CENTRAL);
+        PassengerCar pc2 = new PassengerCar(2, 150, "NS-74", "CAF", CENTRAL);
+        PassengerCar pc3 = new PassengerCar(3, 90, "NS-74", "CAF", CENTRAL);
+        PassengerCar pc4 = new PassengerCar(4, 100, "NS-74", "CAF", CarType.TERMINAL);
+        PassengerCar pc5 = new PassengerCar(5, 100, "AS-2014", "ALSTOM", CarType.TERMINAL);
+        PassengerCar pc6 = new PassengerCar(6, 80, "AS-2014", "ALSTOM", CENTRAL);
+        PassengerCar pc7 = new PassengerCar(7, 150, "AS-2014", "ALSTOM", CENTRAL);
+        PassengerCar pc8 = new PassengerCar(8, 120, "AS-2014", "ALSTOM", CarType.TERMINAL);
+        System.out.println(pc6.toString());
     }
 }
