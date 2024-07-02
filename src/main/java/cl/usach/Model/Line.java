@@ -8,7 +8,7 @@ public class Line {
     private int id;
     private String name;
     private String railType;
-    private ArrayList<Section> sections = new ArrayList<>();
+    private ArrayList<Section> sections;
 
     public Line(int id, String name, String railType, ArrayList<Section> sections) {
         this.id = id;
