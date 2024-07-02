@@ -13,7 +13,7 @@ import static cl.usach.Model.StationType.TERMINAL;
 public class Main {
     public static void main(String[] args) {
 
-        //Datos station
+        // Datos station
         Station st0 = new Station(0, "San Alberto Hurtado", TERMINAL, 35);
         Station st1 = new Station(1, "USACH", COMBINACION, 30);
         Station st2 = new Station(2, "Estación Central", COMBINACION, 35);
@@ -24,7 +24,7 @@ public class Main {
         Station st7 = new Station(7, "U. de Chile", COMBINACION, 35);
         Station st8 = new Station(8, "Santa Lucia", TERMINAL, 35);
 
-        //Datos de section
+        // Datos de section
         Section s0 = new Section(st0, st1, 2, 50);
         Section s1 = new Section(st1, st2, 2.5, 55);
         Section s2 = new Section(st2, st3, 1.5, 30);
@@ -34,13 +34,13 @@ public class Main {
         Section s6 = new Section(st6, st7, 2, 40);
         Section s7 = new Section(st7, st8, 3, 20);
 
-        //Datos para crear lines
+        // Datos para crear lines
         ArrayList<Section> sectionListLine0 = new ArrayList<>();
         ArrayList<Section> sectionListLine1 = new ArrayList<>(Arrays.asList(s0, s1, s2, s3, s4, s5, s6, s7));
         Line line0 = new Line(0, "Línea 0", "UIC 60 ASCE", sectionListLine0);
         Line line1 = new Line(1, "Línea 1", "100 R.E.", sectionListLine1);
 
-        //Testeo de metodos de line
+        // Test de metodos de line
         System.out.println(line1.lineLength()); //18.4
         System.out.println(line1.lineSectionLength("San Alberto Hurtado", "La Moneda")); //13.4
         System.out.println(line1.lineCost()); //335
@@ -64,15 +64,15 @@ public class Main {
         PassengerCar pc8 = new PassengerCar(8, 120, "AS-2014", "ALSTOM", CarType.TERMINAL);
 
         // Datos Train
-        /**
-         * train(0, "CAF", "UIC 60 ASCE", 60, [ ], T0),
-         * train(1, "CAF", "UIC 60 ASCE", 70, [PC1, PC0, PC3, PC2], T1),
-         */
-        ArrayList<PassengerCar> listPassengerCar0 = new ArrayList<>(Arrays.asList(pc0, pc1, pc2, pc3, pc4));
-        ArrayList<PassengerCar> listPassengerCar1 = new ArrayList<>(Arrays.asList(pc5, pc6, pc7, pc8));
-        Train t0 = new Train(0, "CAF", 60, 60, listPassengerCar0);
-        Train t1 = new Train(1, "ALSTOM", 70, 120, listPassengerCar1);
+        ArrayList<PassengerCar> passengerCarList0 = new ArrayList<>(Arrays.asList(pc0, pc1, pc2, pc3, pc4));
+        ArrayList<PassengerCar> passengerCarList1 = new ArrayList<>(Arrays.asList(pc5, pc6, pc7, pc8));
+        ArrayList<PassengerCar> passengerCarList2 = new ArrayList<>();
+        Train t0 = new Train(0, "CAF", 60, 60, passengerCarList0);
+        Train t1 = new Train(1, "ALSTOM", 70, 120, passengerCarList1);
+        Train t2 = new Train(2, "ALSTOM", 70, 90, passengerCarList2);
 
-        System.out.println(t1.toString());
+        // Test metodos train
+        t2.addCar(pc6, 0);
+        System.out.println(t2.toString());
     }
 }
