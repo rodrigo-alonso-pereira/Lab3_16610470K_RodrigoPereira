@@ -68,4 +68,14 @@ public class Train {
                 ", carList=" + carList +
                 '}';
     }
+
+    // Metodos propios de train
+
+    /**
+     *
+     * @param car
+     */
+    public void addCar(PassengerCar car, int position) {
+        carList.add(position, car);
+    }
 }
