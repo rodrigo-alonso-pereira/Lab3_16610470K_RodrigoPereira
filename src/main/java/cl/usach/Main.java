@@ -1,11 +1,7 @@
 package cl.usach;
 
-import cl.usach.Model.Line;
-import cl.usach.Model.PassengerCar;
-import cl.usach.Model.Section;
-import cl.usach.Model.Station;
+import cl.usach.Model.*;
 import cl.usach.Service.LineServiceImpl;
-import cl.usach.Model.CarType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,18 +52,7 @@ public class Main {
         LineServiceImpl lineService = new LineServiceImpl();
         System.out.println(lineService.isLine(line1));
 
-        /**
-         * pcar(0, 90, "NS-74", CT, PC0),
-         * pcar(1, 100, "NS-74", TR, PC1),
-         * pcar(2, 150, "NS-74", TR, PC2),
-         * pcar(3, 90, "NS-74", CT, PC3),
-         * pcar(4, 100, "AS-2014", CT, PC4),
-         * pcar(5, 100, "AS-2014", CT, PC5),
-         * pcar(6, 100, "AS-2016", CT, PC6),
-         * pcar(7, 120, "NS-74", TR, PC7),
-         * pcar(8, 150, "NS-74", TR, PC8),
-         */
-
+        // Datos PassengerCar
         PassengerCar pc0 = new PassengerCar(0, 90, "NS-74", "CAF", CarType.TERMINAL);
         PassengerCar pc1 = new PassengerCar(1, 100, "NS-74", "CAF", CENTRAL);
         PassengerCar pc2 = new PassengerCar(2, 150, "NS-74", "CAF", CENTRAL);
@@ -77,6 +62,17 @@ public class Main {
         PassengerCar pc6 = new PassengerCar(6, 80, "AS-2014", "ALSTOM", CENTRAL);
         PassengerCar pc7 = new PassengerCar(7, 150, "AS-2014", "ALSTOM", CENTRAL);
         PassengerCar pc8 = new PassengerCar(8, 120, "AS-2014", "ALSTOM", CarType.TERMINAL);
-        System.out.println(pc6.toString());
+
+        // Datos Train
+        /**
+         * train(0, "CAF", "UIC 60 ASCE", 60, [ ], T0),
+         * train(1, "CAF", "UIC 60 ASCE", 70, [PC1, PC0, PC3, PC2], T1),
+         */
+        ArrayList<PassengerCar> listPassengerCar0 = new ArrayList<>(Arrays.asList(pc0, pc1, pc2, pc3, pc4));
+        ArrayList<PassengerCar> listPassengerCar1 = new ArrayList<>(Arrays.asList(pc5, pc6, pc7, pc8));
+        Train t0 = new Train(0, "CAF", 60, 60, listPassengerCar0);
+        Train t1 = new Train(1, "ALSTOM", 70, 120, listPassengerCar1);
+
+        System.out.println(t1.toString());
     }
 }
