@@ -1,21 +1,32 @@
 package cl.usach.Util;
 
-import cl.usach.Model.Section;
-import cl.usach.Model.Station;
-import cl.usach.Model.StationType;
+import cl.usach.Model.*;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Stream;
 import static cl.usach.Model.StationType.*;
 
 public class Utililty {
 
+    /**
+     *
+     * @param list
+     * @return
+     */
     public boolean isRepeatElement(List<?> list) {
-        return list.stream().allMatch(new HashSet<>()::add);
+        if (list == null || list.isEmpty()) {
+            return false;
+        } else
+            return list.stream().allMatch(new HashSet<>()::add);
+
     }
 
+    /**
+     *
+     * @param sectionList
+     * @return
+     */
     public boolean isSectionCommunicates(List<Section> sectionList) {
         var name = sectionList.get(0).getPoint2().getName();
         var flag = true;
@@ -29,10 +40,43 @@ public class Utililty {
         return flag;
     }
 
+    /**
+     *
+     * @param stationList
+     * @return
+     */
     public boolean isTerminal(List<Station> stationList) {
         Station firstStation = stationList.get(0);
         Station secondStation = stationList.get(stationList.size() - 1);
         return firstStation.getStationType().equals(secondStation.getStationType());
+    }
+
+    /**
+     *
+     * @param passengerCarList
+     * @param trainMaker
+     * @return
+     */
+    public boolean isValidtrainMaker(List<PassengerCar> passengerCarList, String trainMaker) {
+        if (passengerCarList == null || passengerCarList.isEmpty() || trainMaker == null) {
+            return false;
+        } else
+            return passengerCarList.stream().flatMap(e -> Stream.of(e.getTrainMaker())).distinct().count() <= 1;
+    }
+
+    /**
+     *
+     * @param passengerCarList
+     * @return
+     */
+    public boolean isValidTrainFormat(List<PassengerCar> passengerCarList) {
+        if (passengerCarList == null || passengerCarList.isEmpty() || passengerCarList.size() < 2) {
+            return false;
+        } else {
+            return passengerCarList.get(0).getCarType().equals(CarType.TERMINAL)
+                    && passengerCarList.get(passengerCarList.size() - 1).getCarType().equals(CarType.TERMINAL)
+                    && passengerCarList.subList(1, passengerCarList.size() - 1).stream().allMatch(e -> e.getCarType().equals(CarType.CENTRAL));
+        }
     }
     
 }
