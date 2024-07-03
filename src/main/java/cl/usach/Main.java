@@ -9,13 +9,12 @@ import java.util.Arrays;
 
 import static cl.usach.Model.StationType.*;
 import static cl.usach.Model.CarType.*;
-import static cl.usach.Model.StationType.TERMINAL;
 
 public class Main {
     public static void main(String[] args) {
 
         // Datos station
-        Station st0 = new Station(0, "San Alberto Hurtado", TERMINAL, 35);
+        Station st0 = new Station(0, "San Alberto Hurtado", StationType.TERMINAL, 35);
         Station st1 = new Station(1, "USACH", COMBINACION, 30);
         Station st2 = new Station(2, "Estación Central", COMBINACION, 35);
         Station st3 = new Station(3, "ULA", REGULAR, 35);
@@ -23,7 +22,7 @@ public class Main {
         Station st5 = new Station(5, "Los Héroes", COMBINACION, 35);
         Station st6 = new Station(6, "La Moneda", REGULAR, 35);
         Station st7 = new Station(7, "U. de Chile", COMBINACION, 35);
-        Station st8 = new Station(8, "Santa Lucia", TERMINAL, 35);
+        Station st8 = new Station(8, "Santa Lucia", StationType.TERMINAL, 35);
 
         // Datos de section
         Section s0 = new Section(st0, st1, 2, 50);
@@ -65,7 +64,7 @@ public class Main {
         PassengerCar pc8 = new PassengerCar(8, 120, "AS-2014", "ALSTOM", CarType.TERMINAL);
 
         // Datos Train
-        ArrayList<PassengerCar> passengerCarList0 = new ArrayList<>(Arrays.asList(pc0, pc1, pc2, pc3, pc4));
+        ArrayList<PassengerCar> passengerCarList0 = new ArrayList<>(Arrays.asList(pc0, pc1, pc2, pc3));
         ArrayList<PassengerCar> passengerCarList1 = new ArrayList<>(Arrays.asList(pc5, pc6, pc7, pc8));
         ArrayList<PassengerCar> passengerCarList2 = new ArrayList<>();
         Train t0 = new Train(0, "CAF", 60, 60, passengerCarList0);
@@ -74,10 +73,11 @@ public class Main {
 
         // Test metodos train
         t2.addCar(pc6, 0);
-        System.out.println(t2.toString());
 
+        // Test metodos de TrainServiceImpl
         TrainServiceImpl trainService = new TrainServiceImpl();
         trainService.removeCar(t2, 0);
-        System.out.println(t2.toString());
+        System.out.println(t0.toString());
+        System.out.println(trainService.isTrain(t0));
     }
 }
