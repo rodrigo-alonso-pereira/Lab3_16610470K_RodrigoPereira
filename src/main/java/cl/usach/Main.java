@@ -2,6 +2,7 @@ package cl.usach;
 
 import cl.usach.Model.*;
 import cl.usach.Service.LineServiceImpl;
+import cl.usach.Service.TrainServiceImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -73,6 +74,10 @@ public class Main {
 
         // Test metodos train
         t2.addCar(pc6, 0);
+        System.out.println(t2.toString());
+
+        TrainServiceImpl trainService = new TrainServiceImpl();
+        trainService.removeCar(t2, 0);
         System.out.println(t2.toString());
     }
 }
