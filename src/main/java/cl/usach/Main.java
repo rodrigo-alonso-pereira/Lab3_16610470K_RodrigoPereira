@@ -64,7 +64,7 @@ public class Main {
         PassengerCar pc8 = new PassengerCar(8, 120, "AS-2014", "ALSTOM", CarType.TERMINAL);
 
         // Datos Train
-        ArrayList<PassengerCar> passengerCarList0 = new ArrayList<>(Arrays.asList(pc0, pc1, pc2, pc3));
+        ArrayList<PassengerCar> passengerCarList0 = new ArrayList<>(Arrays.asList(pc0, pc1, pc2, pc3, pc4));
         ArrayList<PassengerCar> passengerCarList1 = new ArrayList<>(Arrays.asList(pc5, pc6, pc7, pc8));
         ArrayList<PassengerCar> passengerCarList2 = new ArrayList<>();
         Train t0 = new Train(0, "CAF", 60, 60, passengerCarList0);
@@ -79,5 +79,9 @@ public class Main {
         trainService.removeCar(t2, 0);
         System.out.println(t0.toString());
         System.out.println(trainService.isTrain(t0));
+
+        System.out.println("Capacidad Tren: " + t2.fetchCapacity());
+
+
     }
 }
