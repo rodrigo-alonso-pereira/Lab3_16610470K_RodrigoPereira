@@ -1,6 +1,8 @@
 package cl.usach.Model;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
+
 public class Train {
 
     private int id;
@@ -77,5 +79,9 @@ public class Train {
     // TODO: Revisar las excepciones cuando posicion esta fuera del tamaño de lista
     public void addCar(PassengerCar car, int position) {
         carList.add(position, car);
+    }
+
+    public int fetchCapacity() {
+        return carList.stream().flatMap(e -> Stream.of(e.getPassengerCapacity())).reduce(0, Integer::sum);
     }
 }
