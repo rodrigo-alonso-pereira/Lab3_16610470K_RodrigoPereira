@@ -69,4 +69,13 @@ public class Subway{
                 ", drivers=" + drivers +
                 '}';
     }
+
+    // Metodos propios de Subway
+    public void addTrain(List<Train> trainList) {
+        trains.addAll(trainList);
+    }
+
+    public void addTrain(Train train) {
+        trains.add(train);
+    }
 }
