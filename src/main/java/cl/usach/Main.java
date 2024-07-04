@@ -78,7 +78,7 @@ public class Main {
         TrainServiceImpl trainService = new TrainServiceImpl();
         trainService.removeCar(t2, 0);
         System.out.println(t0.toString());
-        System.out.println("isTrain:" + trainService.isTrain(t0));
+        System.out.println("isTrain:" + trainService.isTrain(t2));
 
         System.out.println("Capacidad Tren: " + t2.fetchCapacity());
 
@@ -98,12 +98,18 @@ public class Main {
         ArrayList<Train> listTrain = new ArrayList<>(Arrays.asList(t0, t1));
         sw0.addTrain(listTrain);
         sw0.addTrain(t2);
-        System.out.println("SUBWAY -> " + sw0);
 
         ArrayList<Line> lineList = new ArrayList<>(Arrays.asList(l0, l1));
         sw0.addLine(l1);
         sw0.addLine(lineList);
-        System.out.println("SUBWAY -> " + sw0);
+
+        ArrayList<Driver> driverList = new ArrayList<>(Arrays.asList(d0, d1, d2));
+        ArrayList<Driver> driverList2 = new ArrayList<>(Arrays.asList(d3, d4));
+        sw0.addDriver(driverList);
+        sw0.addDriver(driverList2);
+        sw0.addDriver(d5);
+
+        //System.out.println("SUBWAY -> " + sw0.toString());
 
 
     }

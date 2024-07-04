@@ -73,6 +73,9 @@ public class Subway{
                 ", lines=" + lines +
                 ", trains=" + trains +
                 ", drivers=" + drivers +
+                ", trainService=" + trainService +
+                ", lineService=" + lineService +
+                ", util=" + util +
                 '}';
     }
 
@@ -86,9 +89,13 @@ public class Subway{
      * @param trainList
      */
     public void addTrain(List<Train> trainList) {
+        List<Integer> idList = trains.stream().flatMap(e -> Stream.of(e.getId())).collect(Collectors.toList());
         for (Train train : trainList) {
-            if (trainService.isTrain(train))
+            idList.add(train.getId());
+            if (trainService.isTrain(train) && util.isRepeatElement(idList))
                 trains.add(train);
+            else
+                idList.remove(idList.size() - 1);
         }
     }
 
@@ -97,9 +104,12 @@ public class Subway{
      * @param train
      */
     public void addTrain(Train train) {
+        List<Integer> idList = trains.stream().flatMap(e -> Stream.of(e.getId())).collect(Collectors.toList());
+        idList.add(train.getId());
         if (trainService.isTrain(train))
             trains.add(train);
-
+        else
+            idList.remove(idList.size() - 1);
     }
     /**
      *
@@ -134,7 +144,17 @@ public class Subway{
      * @param driver
      */
     public void addDriver(List<Driver> driver) {
-        drivers.addAll(driver);
+        List<Integer> idList = drivers.stream().flatMap(e -> Stream.of(e.getId())).collect(Collectors.toList());
+        System.out.println(idList);
+        for (Driver d : driver) {
+            idList.add(d.getId());
+            System.out.println(idList);
+            if (util.isRepeatElement(idList))
+                drivers.add(d);
+            else
+                idList.remove(idList.size() - 1);
+            System.out.println(idList);
+        }
     }
 
     /**
@@ -142,8 +162,15 @@ public class Subway{
      * @param driver
      */
     public void addDriver(Driver driver) {
-        drivers.add(driver);
+        List<Integer> idList = drivers.stream().flatMap(e -> Stream.of(e.getId())).collect(Collectors.toList());
+        System.out.println(idList);
+        idList.add(driver.getId());
+        System.out.println(idList);
+        if (util.isRepeatElement(idList))
+            drivers.add(driver);
+        else
+            idList.remove(idList.size() - 1);
+        System.out.println(idList);
     }
-
 
 }
