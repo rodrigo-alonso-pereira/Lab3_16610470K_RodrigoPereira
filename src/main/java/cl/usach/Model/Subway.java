@@ -87,7 +87,6 @@ public class Subway{
     public void addTrain(Train train) {
         trains.add(train);
     }
-
     /**
      *
      * @param lineList
@@ -104,6 +103,21 @@ public class Subway{
         lines.add(line);
     }
 
+    /**
+     *
+     * @param driver
+     */
+    public void addDriver(List<Driver> driver) {
+        drivers.addAll(driver);
+    }
+
+    /**
+     *
+     * @param driver
+     */
+    public void addDriver(Driver driver) {
+        drivers.add(driver);
+    }
 
 
 }
