@@ -71,11 +71,39 @@ public class Subway{
     }
 
     // Metodos propios de Subway
+
+    /**
+     *
+     * @param trainList
+     */
     public void addTrain(List<Train> trainList) {
         trains.addAll(trainList);
     }
 
+    /**
+     *
+     * @param train
+     */
     public void addTrain(Train train) {
         trains.add(train);
     }
+
+    /**
+     *
+     * @param lineList
+     */
+    public void addLine(List<Line> lineList) {
+        lines.addAll(lineList);
+    }
+
+    /**
+     *
+     * @param line
+     */
+    public void addLine(Line line) {
+        lines.add(line);
+    }
+
+
+
 }
