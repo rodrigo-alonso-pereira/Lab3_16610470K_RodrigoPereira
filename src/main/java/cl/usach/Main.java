@@ -3,6 +3,7 @@ package cl.usach;
 import cl.usach.Model.*;
 import cl.usach.Service.LineServiceImpl;
 import cl.usach.Service.TrainServiceImpl;
+import cl.usach.Util.Utililty;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -109,8 +110,11 @@ public class Main {
         sw0.addDriver(driverList2);
         sw0.addDriver(d5);
 
-        //System.out.println("SUBWAY -> " + sw0.toString());
+        System.out.println("SUBWAY -> " + sw0.toString());
 
+        // Pruebas toString
+        Utililty util = new Utililty();
+        System.out.println(sw0.toString2());
 
     }
 }
