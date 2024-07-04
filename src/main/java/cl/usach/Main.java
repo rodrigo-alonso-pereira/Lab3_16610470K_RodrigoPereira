@@ -37,20 +37,20 @@ public class Main {
         // Datos para crear lines
         ArrayList<Section> sectionListLine0 = new ArrayList<>();
         ArrayList<Section> sectionListLine1 = new ArrayList<>(Arrays.asList(s0, s1, s2, s3, s4, s5, s6, s7));
-        Line line0 = new Line(0, "Línea 0", "UIC 60 ASCE", sectionListLine0);
-        Line line1 = new Line(1, "Línea 1", "100 R.E.", sectionListLine1);
+        Line l0 = new Line(0, "Línea 0", "UIC 60 ASCE", sectionListLine0);
+        Line l1 = new Line(1, "Línea 1", "100 R.E.", sectionListLine1);
 
         // Test de metodos de line
-        System.out.println(line1.lineLength()); //18.4
-        System.out.println(line1.lineSectionLength("San Alberto Hurtado", "La Moneda")); //13.4
-        System.out.println(line1.lineCost()); //335
-        System.out.println(line1.lineSectionCost("San Alberto Hurtado", "La Moneda")); //275
-        line0.lineAddSection(s0);
-        System.out.println(line0.toString());
-        System.out.println(line1.toString());
+        System.out.println(l1.lineLength()); //18.4
+        System.out.println(l1.lineSectionLength("San Alberto Hurtado", "La Moneda")); //13.4
+        System.out.println(l1.lineCost()); //335
+        System.out.println(l1.lineSectionCost("San Alberto Hurtado", "La Moneda")); //275
+        l0.lineAddSection(s0);
+        System.out.println(l0.toString());
+        System.out.println(l1.toString());
 
         LineServiceImpl lineService = new LineServiceImpl();
-        System.out.println(lineService.isLine(line1));
+        System.out.println("isLine:" + lineService.isLine(l1));
 
         // Datos PassengerCar
         PassengerCar pc0 = new PassengerCar(0, 90, "NS-74", "CAF", CarType.TERMINAL);
@@ -78,7 +78,7 @@ public class Main {
         TrainServiceImpl trainService = new TrainServiceImpl();
         trainService.removeCar(t2, 0);
         System.out.println(t0.toString());
-        System.out.println(trainService.isTrain(t0));
+        System.out.println("isTrain:" + trainService.isTrain(t0));
 
         System.out.println("Capacidad Tren: " + t2.fetchCapacity());
 
@@ -98,7 +98,13 @@ public class Main {
         ArrayList<Train> listTrain = new ArrayList<>(Arrays.asList(t0, t1));
         sw0.addTrain(listTrain);
         sw0.addTrain(t2);
-        System.out.println(sw0);
+        System.out.println("SUBWAY -> " + sw0);
+
+        ArrayList<Line> lineList = new ArrayList<>(Arrays.asList(l0, l1));
+        sw0.addLine(l1);
+        sw0.addLine(lineList);
+        System.out.println("SUBWAY -> " + sw0);
+
 
     }
 }

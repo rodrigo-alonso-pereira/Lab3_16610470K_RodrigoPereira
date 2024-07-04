@@ -2,9 +2,12 @@ package cl.usach.Model;
 
 import cl.usach.Service.LineServiceImpl;
 import cl.usach.Service.TrainServiceImpl;
+import cl.usach.Util.Utililty;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Subway{
 
@@ -76,6 +79,7 @@ public class Subway{
     // Metodos propios de Subway
     TrainServiceImpl trainService = new TrainServiceImpl();
     LineServiceImpl lineService =  new LineServiceImpl();
+    Utililty util = new Utililty();
 
     /**
      *
@@ -83,9 +87,8 @@ public class Subway{
      */
     public void addTrain(List<Train> trainList) {
         for (Train train : trainList) {
-            if (trainService.isTrain(train)) {
+            if (trainService.isTrain(train))
                 trains.add(train);
-            }
         }
     }
 
@@ -94,20 +97,23 @@ public class Subway{
      * @param train
      */
     public void addTrain(Train train) {
-        if (trainService.isTrain(train)) {
+        if (trainService.isTrain(train))
             trains.add(train);
-        }
+
     }
     /**
      *
      * @param lineList
      */
     public void addLine(List<Line> lineList) {
+        List<Integer> idList = lines.stream().flatMap(e -> Stream.of(e.getId())).collect(Collectors.toList());
         for (Line line : lineList) {
-            if (lineService.isLine(line))
+            idList.add(line.getId());
+            if (lineService.isLine(line) && util.isRepeatElement(idList))
                 lines.add(line);
+            else
+                idList.remove(idList.size() - 1);
         }
-        lines.addAll(lineList);
     }
 
     /**
@@ -115,7 +121,12 @@ public class Subway{
      * @param line
      */
     public void addLine(Line line) {
-        lines.add(line);
+        List<Integer> idList = lines.stream().flatMap(e -> Stream.of(e.getId())).collect(Collectors.toList());
+        idList.add(line.getId());
+        if (lineService.isLine(line))
+            lines.add(line);
+        else
+            idList.remove(idList.size() - 1);
     }
 
     /**
