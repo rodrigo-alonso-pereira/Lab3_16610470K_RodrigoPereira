@@ -1,5 +1,7 @@
 package cl.usach.Model;
 
+import cl.usach.Service.TrainServiceImpl;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,13 +73,18 @@ public class Subway{
     }
 
     // Metodos propios de Subway
+    TrainServiceImpl trainService = new TrainServiceImpl();
 
     /**
      *
      * @param trainList
      */
     public void addTrain(List<Train> trainList) {
-        trains.addAll(trainList);
+        for (Train train : trainList) {
+            if (trainService.isTrain(train)) {
+                trains.addAll(trainList);
+            }
+        }
     }
 
     /**
@@ -85,7 +92,9 @@ public class Subway{
      * @param train
      */
     public void addTrain(Train train) {
-        trains.add(train);
+        if (trainService.isTrain(train)) {
+            trains.add(train);
+        }
     }
     /**
      *

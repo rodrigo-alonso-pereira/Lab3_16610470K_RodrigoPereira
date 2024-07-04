@@ -82,16 +82,23 @@ public class Main {
 
         System.out.println("Capacidad Tren: " + t2.fetchCapacity());
 
+        // Datos Driver
+        Driver d0 = new Driver(0, "Eren Yeager", "CAF");
+        Driver d1 = new Driver(1, "Oliver Atom", "ALSTOM");
+        Driver d2 = new Driver(2, "Kakaroto", "CAF");
+        Driver d3 = new Driver(3, "Levy Ackerman", "ALSTOM");
+        Driver d4 = new Driver(4, "Hanamichi Sakuragi", "CAF");
+        Driver d5 = new Driver(5, "Monkey D. Luffy", "ALSTOM");
+
         // Datos subway
-        /**
-         * subway(0, "Metro Santiago", SW0),
-         * subway(1, "Metro Valparaiso", SW20),
-         * subway(2, "Metro Concepcion", SW30),
-         */
         Subway sw0 = new Subway(0, "Metro Santiago");
         Subway sw1 = new Subway(1, "Metro Valparaiso");
         Subway sw2 = new Subway(2, "Metro Concepcion");
-        System.out.println(sw2);
+
+        ArrayList<Train> listTrain = new ArrayList<>(Arrays.asList(t0, t1));
+        sw0.addTrain(listTrain);
+        sw0.addTrain(t2);
+        System.out.println(sw0);
 
     }
 }
