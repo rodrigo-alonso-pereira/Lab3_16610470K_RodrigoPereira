@@ -82,6 +82,16 @@ public class Main {
 
         System.out.println("Capacidad Tren: " + t2.fetchCapacity());
 
+        // Datos subway
+        /**
+         * subway(0, "Metro Santiago", SW0),
+         * subway(1, "Metro Valparaiso", SW20),
+         * subway(2, "Metro Concepcion", SW30),
+         */
+        Subway sw0 = new Subway(0, "Metro Santiago");
+        Subway sw1 = new Subway(1, "Metro Valparaiso");
+        Subway sw2 = new Subway(2, "Metro Concepcion");
+        System.out.println(sw2);
 
     }
 }
