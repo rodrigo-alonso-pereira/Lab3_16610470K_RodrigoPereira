@@ -77,5 +77,62 @@ public class Utililty {
                     && passengerCarList.subList(1, passengerCarList.size() - 1).stream().allMatch(e -> e.getCarType().equals(CarType.CENTRAL));
         }
     }
+
+    public String stationToString(Station station) {
+            return  "[" +
+                    "id=" +  String.valueOf(station.getId()) +
+                    ", name=" + station.getStationType() +
+                    ", stationType=" + station.getStationType() +
+                    ", stopTime=" + String.valueOf(station.getStopTime()) + "]";
+    }
+
+    public String sectionToString(Section section) {
+        return "  [" +
+                    "station1 = " +  stationToString(section.getPoint1()) +
+                    ", station2 = " + stationToString(section.getPoint2()) +
+                    ", distance = " + section.getDistance() +
+                    ", cost = " + section.getCost() + "],\n";
+    }
+
+    public String lineToString(Line line) {
+        String sectionsString = "";
+        for (Section section : line.getSections()) {
+            sectionsString = sectionsString.concat(sectionToString(section));
+        }
+
+        return " [id = " +  line.getId() +
+                ", name = " + line.getName() +
+                ", railType = " + line.getRailType() + ",\n" +
+                "  sections = [" + '\n' + sectionsString + "  ]" + '\n' + " ]" + '\n';
+    }
+
+    public String passengerCarToString(PassengerCar passengerCar) {
+        return "   [" +
+                "id=" +  passengerCar.getId() +
+                ", passengerCapacity=" + passengerCar.getPassengerCapacity() +
+                ", model=" + passengerCar.getModel() +
+                ", trainMaker=" + passengerCar.getTrainMaker() +
+                ", carType=" + passengerCar.getCarType() + "],\n";
+    }
+
+    public String trainToString(Train train) {
+        String passengerCarsString= "";
+        for (PassengerCar passengerCar : train.getCarList()) {
+            passengerCarsString = passengerCarsString.concat(passengerCarToString(passengerCar));
+        }
+
+        return " [id = " +  train.getId() +
+                ", trainMaker = " + train.getTrainMaker() +
+                ", speed = " + train.getSpeed() +
+                ", stationStayTime = " + train.getStationStayTime() + ",\n" +
+                "  carList = [" + '\n' + passengerCarsString + "  ]" + '\n' + " ]," + '\n';
+    }
+
+    public String driverToString(Driver driver) {
+        return  " [" +
+                "id = " + driver.getId() +
+                ", name=" + driver.getName() +
+                ", trainMaker=" + driver.getTrainMaker() + "],\n";
+    }
     
 }

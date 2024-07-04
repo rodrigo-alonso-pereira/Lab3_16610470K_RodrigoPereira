@@ -73,9 +73,6 @@ public class Subway{
                 ", lines=" + lines +
                 ", trains=" + trains +
                 ", drivers=" + drivers +
-                ", trainService=" + trainService +
-                ", lineService=" + lineService +
-                ", util=" + util +
                 '}';
     }
 
@@ -145,15 +142,12 @@ public class Subway{
      */
     public void addDriver(List<Driver> driver) {
         List<Integer> idList = drivers.stream().flatMap(e -> Stream.of(e.getId())).collect(Collectors.toList());
-        System.out.println(idList);
         for (Driver d : driver) {
             idList.add(d.getId());
-            System.out.println(idList);
             if (util.isRepeatElement(idList))
                 drivers.add(d);
             else
                 idList.remove(idList.size() - 1);
-            System.out.println(idList);
         }
     }
 
@@ -163,14 +157,38 @@ public class Subway{
      */
     public void addDriver(Driver driver) {
         List<Integer> idList = drivers.stream().flatMap(e -> Stream.of(e.getId())).collect(Collectors.toList());
-        System.out.println(idList);
         idList.add(driver.getId());
-        System.out.println(idList);
         if (util.isRepeatElement(idList))
             drivers.add(driver);
         else
             idList.remove(idList.size() - 1);
-        System.out.println(idList);
+    }
+
+
+    public String toString2() {
+        String lineString = "";
+        String trainString = "";
+        String driverString = "";
+
+        for (Line line : lines) {
+            lineString = lineString.concat(util.lineToString(line));
+        }
+
+        for (Train train : trains) {
+            trainString = trainString.concat(util.trainToString(train));
+        }
+
+        for (Driver driver : drivers) {
+            driverString = driverString.concat(util.driverToString(driver));
+        }
+        String subway = "\n---Subway---\n" +
+                "id = " + id + "," + '\n' +
+                "name = " + name + "," + '\n' +
+                "lines = [" + '\n' + lineString + "],\n" +
+                "trains = [" + '\n' + trainString + "],\n" +
+                "drivers = [" + '\n' + driverString + "]\n";
+
+        return subway;
     }
 
 }
