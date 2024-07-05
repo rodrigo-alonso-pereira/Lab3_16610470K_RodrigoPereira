@@ -87,7 +87,7 @@ public class Utililty {
     }
 
     public String sectionToString(Section section) {
-        return "  [" +
+        return "   [" +
                     "station1 = " +  stationToString(section.getPoint1()) +
                     ", station2 = " + stationToString(section.getPoint2()) +
                     ", distance = " + section.getDistance() +
@@ -112,7 +112,7 @@ public class Utililty {
     }
 
     public String passengerCarToString(PassengerCar passengerCar) {
-        return "   [" +
+        return "    [" +
                 "id=" +  passengerCar.getId() +
                 ", passengerCapacity=" + passengerCar.getPassengerCapacity() +
                 ", model=" + passengerCar.getModel() +
@@ -130,8 +130,8 @@ public class Utililty {
                 ", trainMaker = " + train.getTrainMaker() +
                 ", speed = " + train.getSpeed() +
                 ", stationStayTime = " + train.getStationStayTime() + ",\n" +
-                "  carList = [" + '\n' + passengerCarsString + "  ]," + '\n' +
-                "  driverAssignment = " + ((train.getDriverAssignment() != null) ? "[" + driverAssignmentToString(train.getDriverAssignment()) + "]" : "[ ]") + '\n';
+                "   carList = [" + '\n' + passengerCarsString + "   ]," + '\n' +
+                "   driverAssignment = " + ((train.getDriverAssignment() != null) ? "[" + driverAssignmentToString(train.getDriverAssignment()) + "]" : "[ ]") + '\n';
     }
 
     public String driverToString(Driver driver) {
@@ -143,10 +143,10 @@ public class Utililty {
 
     public String driverAssignmentToString(DriverAssignment driverAssignment) {
         return '\n' +
-                "   driver = " +  driverToString(driverAssignment.getDriver()) +
-                "   departureTime = " + driverAssignment.getDepartureTime()+ ",\n" +
-                "   departureStation = " + stationToString(driverAssignment.getDepartureStation())+ ",\n" +
-                "   arrivalStation = " + stationToString(driverAssignment.getArrivalStation());
+                "    driver = " +  driverToString(driverAssignment.getDriver()) +
+                "    departureTime = " + driverAssignment.getDepartureTime()+ ",\n" +
+                "    departureStation = " + stationToString(driverAssignment.getDepartureStation())+ ",\n" +
+                "    arrivalStation = " + stationToString(driverAssignment.getArrivalStation());
     }
     
 }
