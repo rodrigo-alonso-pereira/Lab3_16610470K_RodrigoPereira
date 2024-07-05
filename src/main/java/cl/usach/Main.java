@@ -5,14 +5,19 @@ import cl.usach.Service.LineServiceImpl;
 import cl.usach.Service.TrainServiceImpl;
 import cl.usach.Util.Utililty;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.Scanner;
 
 import static cl.usach.Model.StationType.*;
 import static cl.usach.Model.CarType.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 
         // Datos station
         Station st0 = new Station(0, "San Alberto Hurtado", StationType.TERMINAL, 35);
@@ -111,9 +116,13 @@ public class Main {
 
         sw0.assignTrainToLine(t1, l1);
 
+        DateFormat sdf = new SimpleDateFormat("hh:mm aa");
+        Date date = sdf.parse("01:30 am");
+        sw0.assignDriverToTrain(t1, d1, date, st0, st8);
+
         // Pruebas toString
         System.out.println(sw0.toString());
-
+        System.out.println(sw0);
 
 
     }
