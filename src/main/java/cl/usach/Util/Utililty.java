@@ -81,7 +81,7 @@ public class Utililty {
     public String stationToString(Station station) {
             return  "[" +
                     "id=" +  String.valueOf(station.getId()) +
-                    ", name=" + station.getStationType() +
+                    ", name=" + station.getName() +
                     ", stationType=" + station.getStationType() +
                     ", stopTime=" + String.valueOf(station.getStopTime()) + "]";
     }

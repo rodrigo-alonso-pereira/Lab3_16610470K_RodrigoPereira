@@ -47,10 +47,10 @@ public class Main {
         Line l1 = new Line(1, "Línea 1", "100 R.E.", sectionListLine1);
 
         // Test de metodos de line
-        System.out.println(l1.lineLength()); //18.4
-        System.out.println(l1.lineSectionLength("San Alberto Hurtado", "La Moneda")); //13.4
-        System.out.println(l1.lineCost()); //335
-        System.out.println(l1.lineSectionCost("San Alberto Hurtado", "La Moneda")); //275
+        System.out.println("lineLength: " + l1.lineLength()); //18.4
+        System.out.println("lineSectionLength" + l1.lineSectionLength("San Alberto Hurtado", "La Moneda")); //13.4
+        System.out.println("lineCost: " + l1.lineCost()); //335
+        System.out.println("lineSectionCost: " + l1.lineSectionCost("San Alberto Hurtado", "La Moneda")); //275
         l0.lineAddSection(s0);
         System.out.println(l0.toString());
         System.out.println(l1.toString());
