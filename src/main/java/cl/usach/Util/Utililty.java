@@ -130,7 +130,8 @@ public class Utililty {
                 ", trainMaker = " + train.getTrainMaker() +
                 ", speed = " + train.getSpeed() +
                 ", stationStayTime = " + train.getStationStayTime() + ",\n" +
-                "  carList = [" + '\n' + passengerCarsString + "  ]" + '\n' + " ]," + '\n';
+                "  carList = [" + '\n' + passengerCarsString + "  ]," + '\n' +
+                "  driverAssignment = " + ((train.getDriverAssignment() != null) ? "[" + driverAssignmentToString(train.getDriverAssignment()) + "]" : "[ ]") + '\n';
     }
 
     public String driverToString(Driver driver) {
@@ -138,6 +139,14 @@ public class Utililty {
                 "id = " + driver.getId() +
                 ", name=" + driver.getName() +
                 ", trainMaker=" + driver.getTrainMaker() + "],\n";
+    }
+
+    public String driverAssignmentToString(DriverAssignment driverAssignment) {
+        return '\n' +
+                "   driver = " +  driverToString(driverAssignment.getDriver()) +
+                "   departureTime = " + driverAssignment.getDepartureTime()+ ",\n" +
+                "   departureStation = " + stationToString(driverAssignment.getDepartureStation())+ ",\n" +
+                "   arrivalStation = " + stationToString(driverAssignment.getArrivalStation());
     }
     
 }

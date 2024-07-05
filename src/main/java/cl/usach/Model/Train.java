@@ -10,6 +10,7 @@ public class Train {
     private int speed;
     private int stationStayTime;
     private ArrayList<PassengerCar> carList;
+    private DriverAssignment driverAssignment;
 
     public Train(int id, String trainMaker, int speed, int stationStayTime, ArrayList<PassengerCar> carList) {
         this.id = id;
@@ -59,6 +60,14 @@ public class Train {
         this.carList = carList;
     }
 
+    public DriverAssignment getDriverAssignment() {
+        return driverAssignment;
+    }
+
+    public void setDriverAssignment(DriverAssignment driverAssignment) {
+        this.driverAssignment = driverAssignment;
+    }
+
     @Override
     public String toString() {
         return "Train{" +
@@ -67,6 +76,7 @@ public class Train {
                 ", speed=" + speed +
                 ", stationStayTime=" + stationStayTime +
                 ", carList=" + carList +
+                ", driverAssignment=" + driverAssignment +
                 '}';
     }
 

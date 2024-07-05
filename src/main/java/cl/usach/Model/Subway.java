@@ -5,7 +5,9 @@ import cl.usach.Service.TrainServiceImpl;
 import cl.usach.Util.Utililty;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -183,6 +185,11 @@ public class Subway{
         return subway;
     }
 
+    /**
+     *
+     * @param train
+     * @param line
+     */
     public void assignTrainToLine(Train train, Line line) {
         Line lineV = lines.stream()
                 .filter(e -> e.getId() == line.getId())
@@ -204,5 +211,30 @@ public class Subway{
 
         lineV.addTrain(trainV);
     }
+
+     public void assignDriverToTrain(Train train, Driver driver, Date departureTime, Station departureStation, Station arrivalStation) {
+         Train trainV = trains.stream()
+                 .filter(e -> e.getId() == train.getId())
+                 .findFirst()
+                 .orElse(null);
+
+         Driver driverV = drivers.stream()
+                 .filter(e -> e.getId() == driver.getId())
+                 .findFirst()
+                 .orElse(null);
+
+         if (trainV == null) {
+             System.out.println("Tren con id=" + train.getId() + " no encontrado");
+             return;
+         } else if (driverV == null) {
+             System.out.println("Driver con id=" + driver.getId() + " no encontrado");
+             return;
+         } else if (!Objects.equals(train.getTrainMaker(), driver.getTrainMaker())) {
+             System.out.println("TrainMaker incompatible entre train y driver");
+             return;
+         }
+         DriverAssignment driverAssignment = new DriverAssignment(driver, departureTime, arrivalStation, departureStation);
+         trainV.setDriverAssignment(driverAssignment);
+     }
 
 }

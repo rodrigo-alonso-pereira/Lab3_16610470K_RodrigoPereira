@@ -6,6 +6,9 @@ public class Driver {
     private String name;
     private String trainMaker;
 
+    public Driver() {
+    }
+
     public Driver(int id, String name, String trainMaker) {
         this.id = id;
         this.name = name;
