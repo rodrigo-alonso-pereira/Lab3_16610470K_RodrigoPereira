@@ -108,13 +108,13 @@ public class Main {
         ArrayList<Driver> driverList2 = new ArrayList<>(Arrays.asList(d3, d4));
         sw0.addDriver(driverList);
         sw0.addDriver(driverList2);
-        sw0.addDriver(d5);
 
-        System.out.println("SUBWAY -> " + sw0.toString());
+        sw0.assignTrainToLine(t1, l1);
 
         // Pruebas toString
-        Utililty util = new Utililty();
-        System.out.println(sw0.toString2());
+        System.out.println(sw0.toString());
+
+
 
     }
 }
