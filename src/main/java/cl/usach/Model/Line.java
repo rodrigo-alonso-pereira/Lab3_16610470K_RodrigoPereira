@@ -9,12 +9,14 @@ public class Line {
     private String name;
     private String railType;
     private ArrayList<Section> sections;
+    private ArrayList<Train> trains;
 
     public Line(int id, String name, String railType, ArrayList<Section> sections) {
         this.id = id;
         this.name = name;
         this.railType = railType;
         this.sections = sections;
+        this.trains = new ArrayList<>();
     }
 
     public int getId() {
@@ -47,6 +49,29 @@ public class Line {
 
     public void setSections(ArrayList<Section> sections) {
         this.sections = sections;
+    }
+
+    public ArrayList<Train> getTrains() {
+        return trains;
+    }
+
+    public void setTrains(ArrayList<Train> trains) {
+        this.trains = trains;
+    }
+
+    public void addTrain(Train train) {
+        trains.add(train);
+    }
+
+    @Override
+    public String toString() {
+        return "Line{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", railType='" + railType + '\'' +
+                ", sections=" + sections +
+                ", trains=" + trains +
+                '}';
     }
 
     // Metodos Propios Line
@@ -127,13 +152,4 @@ public class Line {
         sections.add(section);
     }
 
-    @Override
-    public String toString() {
-        return "Line{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", railType='" + railType + '\'' +
-                ", sections=" + sections +
-                '}';
-    }
 }

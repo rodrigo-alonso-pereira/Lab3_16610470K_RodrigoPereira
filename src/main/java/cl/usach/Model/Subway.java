@@ -65,17 +65,6 @@ public class Subway{
         this.drivers = drivers;
     }
 
-    @Override
-    public String toString() {
-        return "Subway{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", lines=" + lines +
-                ", trains=" + trains +
-                ", drivers=" + drivers +
-                '}';
-    }
-
     // Metodos propios de Subway
     TrainServiceImpl trainService = new TrainServiceImpl();
     LineServiceImpl lineService =  new LineServiceImpl();
@@ -164,8 +153,11 @@ public class Subway{
             idList.remove(idList.size() - 1);
     }
 
-
-    public String toString2() {
+    /**
+     *
+     * @return
+     */
+    public String toString() {
         String lineString = "";
         String trainString = "";
         String driverString = "";
@@ -189,6 +181,28 @@ public class Subway{
                 "drivers = [" + '\n' + driverString + "]\n";
 
         return subway;
+    }
+
+    public void assignTrainToLine(Train train, Line line) {
+        Line lineV = lines.stream()
+                .filter(e -> e.getId() == line.getId())
+                .findFirst()
+                .orElse(null);
+
+        Train trainV = trains.stream()
+                .filter(e -> e.getId() == train.getId())
+                .findFirst()
+                .orElse(null);
+
+        if (lineV == null) {
+            System.out.println("Linea con id=" + line.getId() + " no encontrada");
+            return;
+        } else if (trainV == null) {
+            System.out.println("Train con id=" + train.getId() + " no encontrado");
+            return;
+        }
+
+        lineV.addTrain(trainV);
     }
 
 }
