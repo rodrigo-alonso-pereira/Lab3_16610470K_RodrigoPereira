@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Subway{
+public class Subway {
 
     private int id;
     private String name;
@@ -69,11 +69,10 @@ public class Subway{
 
     // Metodos propios de Subway
     TrainServiceImpl trainService = new TrainServiceImpl();
-    LineServiceImpl lineService =  new LineServiceImpl();
+    LineServiceImpl lineService = new LineServiceImpl();
     Utililty util = new Utililty();
 
     /**
-     *
      * @param trainList
      */
     public void addTrain(List<Train> trainList) {
@@ -88,7 +87,6 @@ public class Subway{
     }
 
     /**
-     *
      * @param train
      */
     public void addTrain(Train train) {
@@ -99,8 +97,8 @@ public class Subway{
         else
             idList.remove(idList.size() - 1);
     }
+
     /**
-     *
      * @param lineList
      */
     public void addLine(List<Line> lineList) {
@@ -115,7 +113,6 @@ public class Subway{
     }
 
     /**
-     *
      * @param line
      */
     public void addLine(Line line) {
@@ -128,7 +125,6 @@ public class Subway{
     }
 
     /**
-     *
      * @param driver
      */
     public void addDriver(List<Driver> driver) {
@@ -143,7 +139,6 @@ public class Subway{
     }
 
     /**
-     *
      * @param driver
      */
     public void addDriver(Driver driver) {
@@ -156,7 +151,6 @@ public class Subway{
     }
 
     /**
-     *
      * @return
      */
     public String toString() {
@@ -186,55 +180,94 @@ public class Subway{
     }
 
     /**
-     *
      * @param train
      * @param line
      */
     public void assignTrainToLine(Train train, Line line) {
+        // Evalua que line exista en subway
         Line lineV = lines.stream()
                 .filter(e -> e.getId() == line.getId())
                 .findFirst()
                 .orElse(null);
 
+        // Evalua que tren exista en subway
         Train trainV = trains.stream()
                 .filter(e -> e.getId() == train.getId())
                 .findFirst()
                 .orElse(null);
 
         if (lineV == null) {
-            System.out.println("Linea con id=" + line.getId() + " no encontrada");
+            System.out.println("Line con id=" + line.getId() + " no encontrada");
             return;
         } else if (trainV == null) {
             System.out.println("Train con id=" + train.getId() + " no encontrado");
             return;
         }
 
-        lineV.addTrain(trainV);
+        // Obtiene lista de ids de trenes asignados
+        List<Integer> idTrainList = lines.stream()
+                .flatMap(e -> e.getTrains().stream())
+                .map(Train::getId)
+                .collect(Collectors.toList());
+
+        // Evaluar que train no este asignado previamente en alguna linea
+        if (!idTrainList.contains(train.getId()))
+            lineV.addTrain(trainV);
+        else
+            System.out.println("Train con id=" + train.getId() + " ya esta asignado");
     }
 
-     public void assignDriverToTrain(Train train, Driver driver, Date departureTime, Station departureStation, Station arrivalStation) {
-         Train trainV = trains.stream()
-                 .filter(e -> e.getId() == train.getId())
-                 .findFirst()
-                 .orElse(null);
+    public void assignDriverToTrain(Train train, Driver driver, Date departureTime, Station departureStation, Station arrivalStation) {
+        // TODO: No hay evaluacion de que las estaciones ingresadas, existan realmente en la linea que fue asignado el tren.
+        // Evalua que tren exista en subway
+        Train trainV = trains.stream()
+                .filter(e -> e.getId() == train.getId())
+                .findFirst()
+                .orElse(null);
 
-         Driver driverV = drivers.stream()
-                 .filter(e -> e.getId() == driver.getId())
-                 .findFirst()
-                 .orElse(null);
+        // Evalua que driver exista en subway
+        Driver driverV = drivers.stream()
+                .filter(e -> e.getId() == driver.getId())
+                .findFirst()
+                .orElse(null);
 
-         if (trainV == null) {
-             System.out.println("Tren con id=" + train.getId() + " no encontrado");
-             return;
-         } else if (driverV == null) {
-             System.out.println("Driver con id=" + driver.getId() + " no encontrado");
-             return;
-         } else if (!Objects.equals(train.getTrainMaker(), driver.getTrainMaker())) {
-             System.out.println("TrainMaker incompatible entre train y driver");
-             return;
-         }
-         DriverAssignment driverAssignment = new DriverAssignment(driver, departureTime, arrivalStation, departureStation);
-         trainV.setDriverAssignment(driverAssignment);
-     }
+        if (trainV == null) {
+            System.out.println("Train con id=" + train.getId() + " no encontrado");
+            return;
+        } else if (driverV == null) {
+            System.out.println("Driver con id=" + driver.getId() + " no encontrado");
+            return;
+        } else if (!Objects.equals(train.getTrainMaker(), driver.getTrainMaker())) {
+            System.out.println("TrainMaker incompatible entre train y driver");
+            return;
+        }
 
+        DriverAssignment driverAssignment = new DriverAssignment(driver, departureTime, departureStation, arrivalStation);
+        trainV.setDriverAssignment(driverAssignment);
+    }
+
+    public String whereIsTrain(int idTrain, Date time) {
+        // Buscar la linea que tenga el idTrain
+        Train trainV = lines.stream()
+                .flatMap(e -> e.getTrains().stream())
+                .filter(e -> e.getId() == idTrain)
+                .findFirst()
+                .orElse(null);
+
+        if (trainV == null) {
+            return "Train con id=" + idTrain + " no encontrado";
+        }
+
+        // Busca las secciones que el tren va a recorrer
+        List<Section> sectionList = lines.stream()
+                .filter(e -> e.getTrains().stream().anyMatch(t -> t.getId() == idTrain))
+                .findFirst()
+                .map(Line::getSections)
+                .orElse(null);
+
+        System.out.println(sectionList);
+
+
+        return "Train con id=" + idTrain + " encontrado";
+    }
 }
