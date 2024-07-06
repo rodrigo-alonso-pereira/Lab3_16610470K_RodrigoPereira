@@ -169,14 +169,13 @@ public class Subway {
         for (Driver driver : drivers) {
             driverString = driverString.concat(util.driverToString(driver));
         }
-        String subway = "\n---Subway---\n" +
+
+        return "\n---Subway---\n" +
                 "id = " + id + "," + '\n' +
                 "name = " + name + "," + '\n' +
                 "lines = [" + '\n' + lineString + "],\n" +
                 "trains = [" + '\n' + trainString + "],\n" +
                 "drivers = [" + '\n' + driverString + "]\n";
-
-        return subway;
     }
 
     /**
@@ -185,21 +184,21 @@ public class Subway {
      */
     public void assignTrainToLine(Train train, Line line) {
         // Evalua que line exista en subway
-        Line lineV = lines.stream()
+        Line verifiedTrain = lines.stream()
                 .filter(e -> e.getId() == line.getId())
                 .findFirst()
                 .orElse(null);
 
         // Evalua que tren exista en subway
-        Train trainV = trains.stream()
+        Train verifiedLine = trains.stream()
                 .filter(e -> e.getId() == train.getId())
                 .findFirst()
                 .orElse(null);
 
-        if (lineV == null) {
+        if (verifiedTrain == null) {
             System.out.println("Line con id=" + line.getId() + " no encontrada");
             return;
-        } else if (trainV == null) {
+        } else if (verifiedLine == null) {
             System.out.println("Train con id=" + train.getId() + " no encontrado");
             return;
         }
@@ -212,7 +211,7 @@ public class Subway {
 
         // Evaluar que train no este asignado previamente en alguna linea
         if (!idTrainList.contains(train.getId()))
-            lineV.addTrain(trainV);
+            verifiedTrain.addTrain(verifiedLine);
         else
             System.out.println("Train con id=" + train.getId() + " ya esta asignado");
     }
@@ -220,21 +219,23 @@ public class Subway {
     public void assignDriverToTrain(Train train, Driver driver, Date departureTime, Station departureStation, Station arrivalStation) {
         // TODO: No hay evaluacion de que las estaciones ingresadas, existan realmente en la linea que fue asignado el tren.
         // Evalua que tren exista en subway
-        Train trainV = trains.stream()
+        Train verifiedTrain = trains.stream()
                 .filter(e -> e.getId() == train.getId())
                 .findFirst()
                 .orElse(null);
 
         // Evalua que driver exista en subway
-        Driver driverV = drivers.stream()
+        Driver verifiedLine = drivers.stream()
                 .filter(e -> e.getId() == driver.getId())
                 .findFirst()
                 .orElse(null);
 
-        if (trainV == null) {
+        // TODO: Evaluar que driver no este asignado ya a un tren
+
+        if (verifiedTrain == null) {
             System.out.println("Train con id=" + train.getId() + " no encontrado");
             return;
-        } else if (driverV == null) {
+        } else if (verifiedLine == null) {
             System.out.println("Driver con id=" + driver.getId() + " no encontrado");
             return;
         } else if (!Objects.equals(train.getTrainMaker(), driver.getTrainMaker())) {
@@ -243,18 +244,18 @@ public class Subway {
         }
 
         DriverAssignment driverAssignment = new DriverAssignment(driver, departureTime, departureStation, arrivalStation);
-        trainV.setDriverAssignment(driverAssignment);
+        verifiedTrain.setDriverAssignment(driverAssignment);
     }
 
     public String whereIsTrain(int idTrain, Date time) {
-        // Buscar la linea que tenga el idTrain
-        Train trainV = lines.stream()
+        // Buscar el tren que esta asignado en alguna linea
+        Train verifiedTrain = lines.stream()
                 .flatMap(e -> e.getTrains().stream())
                 .filter(e -> e.getId() == idTrain)
                 .findFirst()
                 .orElse(null);
 
-        if (trainV == null) {
+        if (verifiedTrain == null) {
             return "Train con id=" + idTrain + " no encontrado";
         }
 

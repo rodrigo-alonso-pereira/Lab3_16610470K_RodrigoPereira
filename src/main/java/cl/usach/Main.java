@@ -30,6 +30,16 @@ public class Main {
         Station st7 = new Station(7, "U. de Chile", COMBINACION, 35);
         Station st8 = new Station(8, "Santa Lucia", StationType.TERMINAL, 35);
 
+        Station st10 = new Station(10, "La Cisterna", StationType.TERMINAL, 35);
+        Station st11 = new Station(11, "El Parron", COMBINACION, 30);
+        Station st12 = new Station(12, "Lo Ovalle", COMBINACION, 35);
+        Station st13 = new Station(13, "Ciudad del Niño", StationType.TERMINAL, 35);
+
+        Station st20 = new Station(20, "Cerrillos", StationType.TERMINAL, 35);
+        Station st21 = new Station(21, "Lo Valledor", COMBINACION, 35);
+        Station st22 = new Station(22, "Pedro Aguirre Cerda", REGULAR, 35);
+        Station st23 = new Station(23, "Franklin", StationType.TERMINAL, 35);
+
         // Datos de section
         Section s0 = new Section(st0, st1, 2, 50);
         Section s1 = new Section(st1, st2, 2.5, 55);
@@ -40,11 +50,24 @@ public class Main {
         Section s6 = new Section(st6, st7, 2, 40);
         Section s7 = new Section(st7, st8, 3, 20);
 
+        Section s10 = new Section(st10, st11, 2, 50);
+        Section s11 = new Section(st11, st12, 2.5, 55);
+        Section s12 = new Section(st12, st13, 1.5, 30);
+
+        Section s20 = new Section(st20, st21, 1.4, 50);
+        Section s21 = new Section(st21, st22, 2, 40);
+        Section s22 = new Section(st22, st23, 3, 20);
+
         // Datos para crear lines
         ArrayList<Section> sectionListLine0 = new ArrayList<>();
         ArrayList<Section> sectionListLine1 = new ArrayList<>(Arrays.asList(s0, s1, s2, s3, s4, s5, s6, s7));
+        ArrayList<Section> sectionListLine2 = new ArrayList<>(Arrays.asList(s10, s11, s12));
+        ArrayList<Section> sectionListLine6 = new ArrayList<>(Arrays.asList(s20, s21, s22));
+
         Line l0 = new Line(0, "Línea 0", "UIC 60 ASCE", sectionListLine0);
         Line l1 = new Line(1, "Línea 1", "100 R.E.", sectionListLine1);
+        Line l2 = new Line(2, "Línea 2", "UIC 60 ASCE", sectionListLine2);
+        Line l6 = new Line(6, "Línea 6", "100 R.E.", sectionListLine6);
 
         // Test de metodos de line
         System.out.println("lineLength: " + l1.lineLength()); //18.4
@@ -56,7 +79,10 @@ public class Main {
         System.out.println(l1.toString());
 
         LineServiceImpl lineService = new LineServiceImpl();
-        System.out.println("isLine:" + lineService.isLine(l1));
+        System.out.println("isLine " + l0.getName() + ": " + lineService.isLine(l0));
+        System.out.println("isLine " + l1.getName() + ": "  + lineService.isLine(l1));
+        System.out.println("isLine " + l2.getName() + ": "  + lineService.isLine(l2));
+        System.out.println("isLine " + l6.getName() + ": "  + lineService.isLine(l6));
 
         // Datos PassengerCar
         PassengerCar pc0 = new PassengerCar(0, 90, "NS-74", "CAF", CarType.TERMINAL);
@@ -84,7 +110,9 @@ public class Main {
         TrainServiceImpl trainService = new TrainServiceImpl();
         trainService.removeCar(t2, 0);
         System.out.println(t0.toString());
-        System.out.println("isTrain:" + trainService.isTrain(t2));
+        System.out.println("isTrain tren de id " + t0.getId() + ": " + trainService.isTrain(t0)); //true
+        System.out.println("isTrain tren de id " + t1.getId() + ": " + trainService.isTrain(t1)); // true
+        System.out.println("isTrain tren de id " + t2.getId() + ": " + trainService.isTrain(t2)); // false
 
         System.out.println("Capacidad Tren: " + t2.fetchCapacity());
 
@@ -107,6 +135,8 @@ public class Main {
 
         ArrayList<Line> lineList = new ArrayList<>(Arrays.asList(l0, l1));
         sw0.addLine(l1);
+        sw0.addLine(l2);
+        sw0.addLine(l6);
         sw0.addLine(lineList);
 
         ArrayList<Driver> driverList = new ArrayList<>(Arrays.asList(d0, d1, d2));
@@ -115,15 +145,20 @@ public class Main {
         sw0.addDriver(driverList2);
 
         sw0.assignTrainToLine(t1, l1);
+        sw0.assignTrainToLine(t0, l2);
+        sw0.assignTrainToLine(t1, l6); // t1 ya esta asignado
 
         DateFormat sdf = new SimpleDateFormat("hh:mm aa");
-        Date date = sdf.parse("01:30 am");
-        sw0.assignDriverToTrain(t1, d1, date, st0, st8);
+        Date date1 = sdf.parse("01:30 am");
+        Date date2 = sdf.parse("03:00 pm");
+        sw0.assignDriverToTrain(t1, d1, date1, st0, st8);
+        sw0.assignDriverToTrain(t0, d0, date2, st10, st13);
 
         // Pruebas toString
+        Date date3 = sdf.parse("01:40 am");
+        Date date4 = sdf.parse("03:07 pm");
         System.out.println(sw0.toString());
-        System.out.println(sw0);
-
+        System.out.println(sw0.whereIsTrain(1, date3));
 
     }
 }
