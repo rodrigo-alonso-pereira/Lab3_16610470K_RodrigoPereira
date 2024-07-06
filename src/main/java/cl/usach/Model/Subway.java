@@ -84,7 +84,7 @@ public class Subway {
                 System.out.println("Train de id=" + train.getId() + " fue asignado a subway " + name);
             } else {
                 idList.remove(idList.size() - 1);
-                System.out.println("Train de id=" + train.getId() + " ya fue asignado previamente");
+                System.out.println("Train de id=" + train.getId() + " ya fue asignado previamente o no cumple con condiciones para ser un tren valido");
             }
         }
     }
@@ -96,12 +96,12 @@ public class Subway {
         try {
             List<Integer> idList = trains.stream().flatMap(e -> Stream.of(e.getId())).collect(Collectors.toList());
             idList.add(train.getId());
-            if (trainService.isTrain(train)) {
+            if (trainService.isTrain(train) && util.isRepeatElement(idList)) {
                 trains.add(train);
                 System.out.println("Train de id=" + train.getId() + " fue asignado a subway " + name);
             } else {
                 idList.remove(idList.size() - 1);
-                System.out.println("Train de id=" + train.getId() + " ya fue asignado previamente");
+                System.out.println("Train de id=" + train.getId() + " ya fue asignado previamente o no cumple con condiciones para ser un tren valido");
             }
         } catch (Exception e) {
             System.out.println("[addTrain] error: " + e.getMessage());
@@ -121,7 +121,7 @@ public class Subway {
                     System.out.println("Line de id=" + line.getId() + " fue asignado a subway " + name);
                 } else {
                     idList.remove(idList.size() - 1);
-                    System.out.println("Line de id=" + line.getId() + " ya fue asignado previamente");
+                    System.out.println("Line de id=" + line.getId() + " ya fue asignado previamente o no cumple con condiciones para ser un line valido");
                 }
             }
         } catch (Exception e) {
@@ -136,12 +136,12 @@ public class Subway {
         try {
             List<Integer> idList = lines.stream().flatMap(e -> Stream.of(e.getId())).collect(Collectors.toList());
             idList.add(line.getId());
-            if (lineService.isLine(line)) {
+            if (lineService.isLine(line) && util.isRepeatElement(idList)) {
                 lines.add(line);
                 System.out.println("Line de id=" + line.getId() + " fue asignado a subway " + name);
             } else {
                 idList.remove(idList.size() - 1);
-                System.out.println("Line de id=" + line.getId() + " ya fue asignado previamente");
+                System.out.println("Line de id=" + line.getId() + " ya fue asignado previamente o no cumple con condiciones para ser un line valido");
             }
         } catch (Exception e) {
             System.out.println("[addLine] error: " + e.getMessage());
