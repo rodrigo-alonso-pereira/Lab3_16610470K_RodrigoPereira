@@ -268,7 +268,6 @@ public class Subway {
 
     public void assignDriverToTrain(Train train, Driver driver, Date departureTime, Station departureStation, Station arrivalStation) {
         try {
-            // TODO: No hay evaluacion de que las estaciones ingresadas, existan realmente en la linea que fue asignado el tren.
             // Evalua que tren exista en subway
             Train verifiedTrain = trains.stream()
                     .filter(e -> e.getId() == train.getId())
@@ -281,7 +280,7 @@ public class Subway {
                     .findFirst()
                     .orElse(null);
 
-            // TODO: Evaluar que driver no este asignado ya a un tren
+            // Busca id de drivers asignados a trenes
             List<Integer> idDriver = lines.stream()
                     .flatMap(l -> l.getTrains().stream())
                     .map(Train::getDriverAssignment)
@@ -292,25 +291,24 @@ public class Subway {
                     .filter(Objects::nonNull)
                     .collect(Collectors.toList());
 
-            // Entrega resultados de evaluacion
-            if (verifiedTrain == null) {
+            // Entrega resultados de evaluaciones ahteriores
+            if (verifiedTrain == null) // El tren existe en subway?
                 System.out.println("Train con id=" + train.getId() + " no encontrado");
-                return;
-            } else if (verifiedLine == null) {
+            else if (verifiedLine == null) // La linea existe en subway?
                 System.out.println("Driver con id=" + driver.getId() + " no encontrado");
-                return;
-            } else if (!Objects.equals(train.getTrainMaker(), driver.getTrainMaker())) {
-                System.out.println("TrainMaker incompatible entre train y driver");
-                return;
-            } else if (idDriver.contains(driver.getId())) {
+            else if (!Objects.equals(train.getTrainMaker(), driver.getTrainMaker())) // Trainmaker es igual en train y driver?
+                System.out.println("TrainMaker incompatible entre train de id= " + train.getId() + " y driver de id=" + driver.getId());
+            else if (idDriver.contains(driver.getId())) // Driver fue asignado previamente?
                 System.out.println("Driver con id=" + driver.getId() + " ya esta asignado");
-                return;
+            else if (!util.stationBelongs(departureStation, train, lines)) // Estacion de salida existe en la linea asignada al tren?
+                System.out.println("Estacion " + departureStation.getName() + " no existe en la linea en cual esta asignado el tren de id=" + train.getId());
+            else if (!util.stationBelongs(arrivalStation, train, lines)) // Estacion de llegada existe en la linea asignada al tren?
+                System.out.println("Estacion " + arrivalStation.getName() + " no existe en la linea en cual esta asignado el tren de id=" + train.getId());
+            else { // Si lo anterio es validad, se crea y asigna driverAssignment a Train
+                DriverAssignment driverAssignment = new DriverAssignment(driver, departureTime, departureStation, arrivalStation);
+                verifiedTrain.setDriverAssignment(driverAssignment);
+                System.out.println("Driver de id=" + driver.getId() + " fue asignado a train de id=" + train.getId());
             }
-
-            // Crea y asigna driverAssignment a Train
-            DriverAssignment driverAssignment = new DriverAssignment(driver, departureTime, departureStation, arrivalStation);
-            verifiedTrain.setDriverAssignment(driverAssignment);
-            System.out.println("Driver id id=" + driver.getId() + " fue asignado a train de id=" + train.getId());
         } catch (Exception e) {
             System.out.println("[assignDriverToTrain] error: " + e.getMessage());
         }

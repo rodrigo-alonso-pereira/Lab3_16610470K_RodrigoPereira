@@ -94,14 +94,23 @@ public class Main {
         PassengerCar pc6 = new PassengerCar(6, 80, "AS-2014", "ALSTOM", CENTRAL);
         PassengerCar pc7 = new PassengerCar(7, 150, "AS-2014", "ALSTOM", CENTRAL);
         PassengerCar pc8 = new PassengerCar(8, 120, "AS-2014", "ALSTOM", CarType.TERMINAL);
+        PassengerCar pc9 = new PassengerCar(9, 100, "NS-74", "CAF", CarType.TERMINAL);
+        PassengerCar pc10 = new PassengerCar(10, 100, "NS-74", "CAF", CENTRAL);
+        PassengerCar pc11 = new PassengerCar(11, 100, "NS-74", "CAF", CENTRAL);
+        PassengerCar pc12 = new PassengerCar(12, 100, "NS-74", "CAF", CENTRAL);
+        PassengerCar pc13 = new PassengerCar(13, 100, "NS-74", "CAF", CarType.TERMINAL);
 
         // Datos Train
         ArrayList<PassengerCar> passengerCarList0 = new ArrayList<>(Arrays.asList(pc0, pc1, pc2, pc3, pc4));
         ArrayList<PassengerCar> passengerCarList1 = new ArrayList<>(Arrays.asList(pc5, pc6, pc7, pc8));
         ArrayList<PassengerCar> passengerCarList2 = new ArrayList<>();
+        ArrayList<PassengerCar> passengerCarList3 = new ArrayList<>(Arrays.asList(pc9, pc10, pc11, pc12, pc13));
         Train t0 = new Train(0, "CAF", 60, 60, passengerCarList0);
         Train t1 = new Train(1, "ALSTOM", 70, 120, passengerCarList1);
         Train t2 = new Train(2, "ALSTOM", 70, 90, passengerCarList2);
+        Train t3 = new Train(3, "CAF", 80, 100, passengerCarList3);
+        Train t4 = new Train(4, "CAF", 65, 70, passengerCarList0);
+        Train t5 = new Train(5, "ALSTOM", 75, 50, passengerCarList1);
 
         // Test metodos train
         t2.addCar(pc6, 0);
@@ -113,6 +122,7 @@ public class Main {
         System.out.println("isTrain tren de id " + t0.getId() + ": " + trainService.isTrain(t0)); //true
         System.out.println("isTrain tren de id " + t1.getId() + ": " + trainService.isTrain(t1)); // true
         System.out.println("isTrain tren de id " + t2.getId() + ": " + trainService.isTrain(t2)); // false
+        System.out.println("isTrain tren de id " + t3.getId() + ": " + trainService.isTrain(t3)); // true
 
         System.out.println("Capacidad Tren: " + t2.fetchCapacity());
 
@@ -129,36 +139,52 @@ public class Main {
         Subway sw1 = new Subway(1, "Metro Valparaiso");
         Subway sw2 = new Subway(2, "Metro Concepcion");
 
-        ArrayList<Train> listTrain = new ArrayList<>(Arrays.asList(t0, t1));
+        // Pruebas de metodos propios de subway
+        ArrayList<Train> listTrain = new ArrayList<>(Arrays.asList(t0, t1, t2, t4, t5));
         sw0.addTrain(listTrain);
-        sw0.addTrain(t2);
+        sw0.addTrain(t3);
+        sw0.addTrain(t0); //Fue asignado previamente
 
         ArrayList<Line> lineList = new ArrayList<>(Arrays.asList(l0, l1));
+        sw0.addLine(lineList);
         sw0.addLine(l1);
         sw0.addLine(l2);
         sw0.addLine(l6);
-        sw0.addLine(lineList);
 
         ArrayList<Driver> driverList = new ArrayList<>(Arrays.asList(d0, d1, d2));
-        ArrayList<Driver> driverList2 = new ArrayList<>(Arrays.asList(d3, d4));
         sw0.addDriver(driverList);
-        sw0.addDriver(driverList2);
+        sw0.addDriver(d1);
+        sw0.addDriver(d3);
+        sw0.addDriver(d4);
 
         sw0.assignTrainToLine(t1, l1);
         sw0.assignTrainToLine(t0, l2);
         sw0.assignTrainToLine(t1, l6); // t1 ya esta asignado
+        sw0.assignTrainToLine(t2, l6);
+        sw0.assignTrainToLine(t3, l6);
+        sw0.assignTrainToLine(t5, l1);
+        sw0.assignTrainToLine(t4, l2);
 
         DateFormat sdf = new SimpleDateFormat("hh:mm aa");
-        Date date1 = sdf.parse("01:30 am");
-        Date date2 = sdf.parse("03:00 pm");
+        Date date1 = sdf.parse("01:30 pm");
+        Date date2 = sdf.parse("09:00 am");
+        Date date3 = sdf.parse("02:00 pm");
+        Date date4 = sdf.parse("06:00 am");
+        Date date5 = sdf.parse("10:00 pm");
+        sw0.assignDriverToTrain(t1, d1, date1, st10, st8); // No existe st10 en line 1
         sw0.assignDriverToTrain(t1, d1, date1, st0, st8);
-        sw0.assignDriverToTrain(t0, d0, date2, st10, st13);
+        sw0.assignDriverToTrain(t5, d3, date2, st2, st7);
+        sw0.assignDriverToTrain(t3, d0, date3, st20, st23);
+        sw0.assignDriverToTrain(t4, d4, date4, st10, st13);
+        sw0.assignDriverToTrain(t5, d2, date5, st10, st13); // Incompatible trainMaker
 
         // Pruebas toString
-        Date date3 = sdf.parse("01:40 am");
-        Date date4 = sdf.parse("03:07 pm");
         System.out.println(sw0.toString());
-        System.out.println(sw0.whereIsTrain(1, date3));
+
+        // Prueba de whereIsTrain
+        Date date11 = sdf.parse("01:40 am");
+        Date date12 = sdf.parse("10:00 pm");
+        //System.out.println(sw0.whereIsTrain(3, date3));
 
     }
 }

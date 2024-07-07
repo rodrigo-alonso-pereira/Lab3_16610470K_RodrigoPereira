@@ -4,6 +4,7 @@ import cl.usach.Model.*;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public class Utililty {
@@ -147,6 +148,21 @@ public class Utililty {
                 "    departureTime = " + driverAssignment.getDepartureTime()+ ",\n" +
                 "    departureStation = " + stationToString(driverAssignment.getDepartureStation())+ ",\n" +
                 "    arrivalStation = " + stationToString(driverAssignment.getArrivalStation());
+    }
+
+    public boolean stationBelongs(Station station, Train train, List<Line> lines) {
+        for (Line l : lines) {
+            for (Train t : l.getTrains()) {
+                if (t.getId() == train.getId()) {
+                    for (Section section : l.getSections()) {
+                        if (section.getPoint1().getId() == station.getId() || section.getPoint2().getId() == station.getId()) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
     
 }
