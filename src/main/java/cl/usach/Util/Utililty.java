@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 public class Utililty {
 
     /**
-     *
      * @param list
      * @return
      */
@@ -23,7 +22,6 @@ public class Utililty {
     }
 
     /**
-     *
      * @param sectionList
      * @return
      */
@@ -31,7 +29,7 @@ public class Utililty {
         var name = sectionList.get(0).getPoint2().getName();
         var flag = true;
         for (int i = 1; i < sectionList.size(); i++) {
-            if(!sectionList.get(i).getPoint1().getName().equals(name)){
+            if (!sectionList.get(i).getPoint1().getName().equals(name)) {
                 flag = false;
                 break;
             }
@@ -41,7 +39,6 @@ public class Utililty {
     }
 
     /**
-     *
      * @param stationList
      * @return
      */
@@ -52,7 +49,6 @@ public class Utililty {
     }
 
     /**
-     *
      * @param passengerCarList
      * @param trainMaker
      * @return
@@ -65,7 +61,6 @@ public class Utililty {
     }
 
     /**
-     *
      * @param passengerCarList
      * @return
      */
@@ -80,19 +75,19 @@ public class Utililty {
     }
 
     public String stationToString(Station station) {
-            return  "[" +
-                    "id=" +  String.valueOf(station.getId()) +
-                    ", name=" + station.getName() +
-                    ", stationType=" + station.getStationType() +
-                    ", stopTime=" + String.valueOf(station.getStopTime()) + "]";
+        return "[" +
+                "id=" + String.valueOf(station.getId()) +
+                ", name=" + station.getName() +
+                ", stationType=" + station.getStationType() +
+                ", stopTime=" + String.valueOf(station.getStopTime()) + "]";
     }
 
     public String sectionToString(Section section) {
         return "   [" +
-                    "station1 = " +  stationToString(section.getPoint1()) +
-                    ", station2 = " + stationToString(section.getPoint2()) +
-                    ", distance = " + section.getDistance() +
-                    ", cost = " + section.getCost() + "],\n";
+                "station1 = " + stationToString(section.getPoint1()) +
+                ", station2 = " + stationToString(section.getPoint2()) +
+                ", distance = " + section.getDistance() +
+                ", cost = " + section.getCost() + "],\n";
     }
 
     public String lineToString(Line line) {
@@ -105,7 +100,7 @@ public class Utililty {
             trainsString = trainsString.concat(trainToString(train));
         }
 
-        return " [id = " +  line.getId() +
+        return " [id = " + line.getId() +
                 ", name = " + line.getName() +
                 ", railType = " + line.getRailType() + ",\n" +
                 "  sections = [" + '\n' + sectionsString + "  ]," + '\n' +
@@ -114,7 +109,7 @@ public class Utililty {
 
     public String passengerCarToString(PassengerCar passengerCar) {
         return "    [" +
-                "id=" +  passengerCar.getId() +
+                "id=" + passengerCar.getId() +
                 ", passengerCapacity=" + passengerCar.getPassengerCapacity() +
                 ", model=" + passengerCar.getModel() +
                 ", trainMaker=" + passengerCar.getTrainMaker() +
@@ -122,12 +117,12 @@ public class Utililty {
     }
 
     public String trainToString(Train train) {
-        String passengerCarsString= "";
+        String passengerCarsString = "";
         for (PassengerCar passengerCar : train.getCarList()) {
             passengerCarsString = passengerCarsString.concat(passengerCarToString(passengerCar));
         }
 
-        return " [id = " +  train.getId() +
+        return " [id = " + train.getId() +
                 ", trainMaker = " + train.getTrainMaker() +
                 ", speed = " + train.getSpeed() +
                 ", stationStayTime = " + train.getStationStayTime() + ",\n" +
@@ -136,7 +131,7 @@ public class Utililty {
     }
 
     public String driverToString(Driver driver) {
-        return  " [" +
+        return " [" +
                 "id = " + driver.getId() +
                 ", name=" + driver.getName() +
                 ", trainMaker=" + driver.getTrainMaker() + "],\n";
@@ -144,25 +139,19 @@ public class Utililty {
 
     public String driverAssignmentToString(DriverAssignment driverAssignment) {
         return '\n' +
-                "    driver = " +  driverToString(driverAssignment.getDriver()) +
-                "    departureTime = " + driverAssignment.getDepartureTime()+ ",\n" +
-                "    departureStation = " + stationToString(driverAssignment.getDepartureStation())+ ",\n" +
+                "    driver = " + driverToString(driverAssignment.getDriver()) +
+                "    departureTime = " + driverAssignment.getDepartureTime() + ",\n" +
+                "    departureStation = " + stationToString(driverAssignment.getDepartureStation()) + ",\n" +
                 "    arrivalStation = " + stationToString(driverAssignment.getArrivalStation());
     }
 
     public boolean stationBelongs(Station station, Train train, List<Line> lines) {
-        for (Line l : lines) {
-            for (Train t : l.getTrains()) {
-                if (t.getId() == train.getId()) {
-                    for (Section section : l.getSections()) {
-                        if (section.getPoint1().getId() == station.getId() || section.getPoint2().getId() == station.getId()) {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-        return false;
+        return lines.stream()
+                .flatMap(l -> l.getTrains().stream()
+                        .filter(t -> t.getId() == train.getId())
+                        .flatMap(t -> l.getSections().stream())
+                )
+                .anyMatch(s -> s.getPoint1().getId() == station.getId() || s.getPoint2().getId() == station.getId());
     }
-    
+
 }
