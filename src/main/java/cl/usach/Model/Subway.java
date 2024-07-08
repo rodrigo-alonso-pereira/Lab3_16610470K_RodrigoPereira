@@ -372,4 +372,24 @@ public class Subway {
         }
         return null;
     }
+
+    public List<Station> trainPath(int idTrain, Date time) {
+        Station currentStation = calculateWhereIsTrain(idTrain, time);
+        List<Section> sectionList = lines.stream()
+                .filter(l -> l.getTrains().stream().anyMatch(t -> t.getId() == idTrain))
+                .findFirst()
+                .map(Line::getSections)
+                .orElse(null);
+        List<Station> stationList = util.getStationList(sectionList);
+
+        List<Station> finalStationList = new ArrayList<>();
+        var flag = false;
+        for (Station station : stationList) {
+            if (station.getId() == currentStation.getId() || flag) {
+                flag = true;
+                finalStationList.add(station);
+            }
+        }
+        return finalStationList;
+    }
 }
