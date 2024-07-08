@@ -79,10 +79,10 @@ public class Main {
         System.out.println(l1.toString());
 
         LineServiceImpl lineService = new LineServiceImpl();
-        System.out.println("isLine " + l0.getName() + ": " + lineService.isLine(l0));
-        System.out.println("isLine " + l1.getName() + ": "  + lineService.isLine(l1));
-        System.out.println("isLine " + l2.getName() + ": "  + lineService.isLine(l2));
-        System.out.println("isLine " + l6.getName() + ": "  + lineService.isLine(l6));
+        System.out.println("isLine " + l0.getName() + ": " + lineService.isLine(l0)); //false
+        System.out.println("isLine " + l1.getName() + ": "  + lineService.isLine(l1)); //true
+        System.out.println("isLine " + l2.getName() + ": "  + lineService.isLine(l2)); //true
+        System.out.println("isLine " + l6.getName() + ": "  + lineService.isLine(l6)); //true
 
         // Datos PassengerCar
         PassengerCar pc0 = new PassengerCar(0, 90, "NS-74", "CAF", CarType.TERMINAL);
@@ -179,12 +179,20 @@ public class Main {
         sw0.assignDriverToTrain(t5, d2, date5, st10, st13); // Incompatible trainMaker
 
         // Pruebas toString
-        System.out.println(sw0.toString());
+        //System.out.println(sw0.toString());
 
         // Prueba de whereIsTrain
-        Date date11 = sdf.parse("01:40 am");
-        Date date12 = sdf.parse("10:00 pm");
-        //System.out.println(sw0.whereIsTrain(3, date3));
+        Date date11 = sdf.parse("09:11 am");
+        Date date12 = sdf.parse("02:02 pm");
+        Date date13 = sdf.parse("06:05 am");
+        Date date14 = sdf.parse("01:00 pm");
+        System.out.println(sw0.whereIsTrain(5, date11)); // Linea 1
+        System.out.println(sw0.whereIsTrain(3, date12)); // Linea 2
+        System.out.println(sw0.whereIsTrain(4, date13)); // Linea 6
+        System.out.println(sw0.whereIsTrain(1, date14)); // error por fecha mal ingresada
+
+        System.out.println(sw0.trainPath(5, date11));
+
 
     }
 }

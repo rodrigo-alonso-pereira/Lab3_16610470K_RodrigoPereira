@@ -2,9 +2,8 @@ package cl.usach.Util;
 
 import cl.usach.Model.*;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Utililty {
@@ -152,6 +151,47 @@ public class Utililty {
                         .flatMap(t -> l.getSections().stream())
                 )
                 .anyMatch(s -> s.getPoint1().getId() == station.getId() || s.getPoint2().getId() == station.getId());
+    }
+
+    public double speedToMs(float speedKh) {
+        return speedKh / 3.6;
+    }
+
+    public List<Station> getStationList(List<Section> sectionList) {
+        return Stream.concat(
+                sectionList.stream()
+                        .flatMap(section -> Stream.of(section.getPoint1())),
+                sectionList.stream()
+                        .reduce((first, second) -> second)
+                        .stream()
+                        .map(Section::getPoint2)
+        ).collect(Collectors.toList());
+    }
+
+    public long getTotalTime(Date start, Date end) {
+        if (start.after(end)) // Verifica que Date end este despues de Date start
+            return 0;
+        else
+            return (end.getTime() - start.getTime())/1000;
+    }
+
+    public Station trainMove(List<Section> sectionList, Long totalTime, Train train) {
+        for (Section section : sectionList) {
+            System.out.println("totalTime en station " + section.getPoint1().getName() + ": " + totalTime + " sec");
+            if (totalTime >= section.getPoint1().getStopTime()) { // Evaluar que tiempo total sea mayor que tiempo en estacion
+                totalTime -= section.getPoint1().getStopTime(); // Restar tiempo de espera en estacion
+                System.out.println("totalTime despues de esperar " + section.getPoint1().getStopTime() + " sec en station " + section.getPoint1().getName() + ": " + totalTime + " sec");
+                var timeNextStation = (section.getDistance() * 1000) / speedToMs(train.getSpeed()); // Calcular tiempo proxima estacion
+                if (totalTime >= timeNextStation) { // Evaluar que el tiempo total sea mayor que tiempo de avance a siguiente estacion
+                    totalTime -= (long)timeNextStation; // Restar tiempo de espera en estacion
+                    System.out.println("totalTime despues de demorar " + timeNextStation + " sec en avanzar a station " + section.getPoint2().getName() + ": " + totalTime + " sec");
+                } else
+                    return section.getPoint1();
+            } else
+                return section.getPoint1();
+
+        }
+        return sectionList.get(sectionList.size()-1).getPoint2(); // Si termino y queda tiempo, retorna estacion final de linea
     }
 
 }

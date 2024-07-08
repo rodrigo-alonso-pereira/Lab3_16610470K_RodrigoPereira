@@ -40,19 +40,9 @@ public class LineServiceImpl implements LineService {
                         .map(section -> section.getPoint2().getName())
         ).collect(Collectors.toList());
 
-         // Obtiene lista de Station
-        List<Station> stationList = Stream.concat(
-                line.getSections().stream()
-                        .flatMap(section -> Stream.of(section.getPoint1())),
-                line.getSections().stream()
-                        .reduce((first, second) -> second)
-                        .stream()
-                        .map(Section::getPoint2)
-        ).collect(Collectors.toList());
-
         return util.isRepeatElement(idList) // Evaluar si id's estan repetidos
                 && util.isRepeatElement(nameList) // Evalua si name's estan repetidos
                 && util.isSectionCommunicates(line.getSections()) // Evalua si las secciones estan comunicadas
-                && util.isTerminal(stationList); //Evalua si linea tiene forma minima T-T
+                && util.isTerminal(util.getStationList(line.getSections())); //Evalua si linea tiene forma minima T-T
     }
 }

@@ -76,14 +76,14 @@ public class Subway {
      * @param trainList
      */
     public void addTrain(List<Train> trainList) {
-        List<Integer> idList = trains.stream().flatMap(e -> Stream.of(e.getId())).collect(Collectors.toList());
+        List<Integer> idLineList = trains.stream().flatMap(e -> Stream.of(e.getId())).collect(Collectors.toList());
         for (Train train : trainList) {
-            idList.add(train.getId());
-            if (trainService.isTrain(train) && util.isRepeatElement(idList)) {
+            idLineList.add(train.getId());
+            if (trainService.isTrain(train) && util.isRepeatElement(idLineList)) {
                 trains.add(train);
                 System.out.println("Train de id=" + train.getId() + " fue asignado a subway " + name);
             } else {
-                idList.remove(idList.size() - 1);
+                idLineList.remove(idLineList.size() - 1);
                 System.out.println("Train de id=" + train.getId() + " ya fue asignado previamente o no cumple con condiciones para ser un tren valido");
             }
         }
@@ -94,13 +94,13 @@ public class Subway {
      */
     public void addTrain(Train train) {
         try {
-            List<Integer> idList = trains.stream().flatMap(e -> Stream.of(e.getId())).collect(Collectors.toList());
-            idList.add(train.getId());
-            if (trainService.isTrain(train) && util.isRepeatElement(idList)) {
+            List<Integer> idTrainList = trains.stream().flatMap(e -> Stream.of(e.getId())).collect(Collectors.toList());
+            idTrainList.add(train.getId());
+            if (trainService.isTrain(train) && util.isRepeatElement(idTrainList)) {
                 trains.add(train);
                 System.out.println("Train de id=" + train.getId() + " fue asignado a subway " + name);
             } else {
-                idList.remove(idList.size() - 1);
+                idTrainList.remove(idTrainList.size() - 1);
                 System.out.println("Train de id=" + train.getId() + " ya fue asignado previamente o no cumple con condiciones para ser un tren valido");
             }
         } catch (Exception e) {
@@ -113,14 +113,14 @@ public class Subway {
      */
     public void addLine(List<Line> lineList) {
         try {
-            List<Integer> idList = lines.stream().flatMap(e -> Stream.of(e.getId())).collect(Collectors.toList());
+            List<Integer> idLineList = lines.stream().flatMap(e -> Stream.of(e.getId())).collect(Collectors.toList());
             for (Line line : lineList) {
-                idList.add(line.getId());
-                if (lineService.isLine(line) && util.isRepeatElement(idList)) {
+                idLineList.add(line.getId());
+                if (lineService.isLine(line) && util.isRepeatElement(idLineList)) {
                     lines.add(line);
                     System.out.println("Line de id=" + line.getId() + " fue asignado a subway " + name);
                 } else {
-                    idList.remove(idList.size() - 1);
+                    idLineList.remove(idLineList.size() - 1);
                     System.out.println("Line de id=" + line.getId() + " ya fue asignado previamente o no cumple con condiciones para ser un line valido");
                 }
             }
@@ -134,13 +134,13 @@ public class Subway {
      */
     public void addLine(Line line) {
         try {
-            List<Integer> idList = lines.stream().flatMap(e -> Stream.of(e.getId())).collect(Collectors.toList());
-            idList.add(line.getId());
-            if (lineService.isLine(line) && util.isRepeatElement(idList)) {
+            List<Integer> idLineList = lines.stream().flatMap(e -> Stream.of(e.getId())).collect(Collectors.toList());
+            idLineList.add(line.getId());
+            if (lineService.isLine(line) && util.isRepeatElement(idLineList)) {
                 lines.add(line);
                 System.out.println("Line de id=" + line.getId() + " fue asignado a subway " + name);
             } else {
-                idList.remove(idList.size() - 1);
+                idLineList.remove(idLineList.size() - 1);
                 System.out.println("Line de id=" + line.getId() + " ya fue asignado previamente o no cumple con condiciones para ser un line valido");
             }
         } catch (Exception e) {
@@ -153,14 +153,14 @@ public class Subway {
      */
     public void addDriver(List<Driver> driver) {
         try {
-            List<Integer> idList = drivers.stream().flatMap(e -> Stream.of(e.getId())).collect(Collectors.toList());
+            List<Integer> idDriverList = drivers.stream().flatMap(e -> Stream.of(e.getId())).collect(Collectors.toList());
             for (Driver d : driver) {
-                idList.add(d.getId());
-                if (util.isRepeatElement(idList)) {
+                idDriverList.add(d.getId());
+                if (util.isRepeatElement(idDriverList)) {
                     drivers.add(d);
                     System.out.println("Driver de id=" + d.getId() + " fue asignado a subway " + name);
                 } else {
-                    idList.remove(idList.size() - 1);
+                    idDriverList.remove(idDriverList.size() - 1);
                     System.out.println("Driver de id=" + d.getId() + " ya fue asignado previamente");
                 }
             }
@@ -174,13 +174,13 @@ public class Subway {
      */
     public void addDriver(Driver driver) {
         try {
-            List<Integer> idList = drivers.stream().flatMap(e -> Stream.of(e.getId())).collect(Collectors.toList());
-            idList.add(driver.getId());
-            if (util.isRepeatElement(idList)) {
+            List<Integer> idDriverList = drivers.stream().flatMap(e -> Stream.of(e.getId())).collect(Collectors.toList());
+            idDriverList.add(driver.getId());
+            if (util.isRepeatElement(idDriverList)) {
                 drivers.add(driver);
                 System.out.println("Driver de id=" + driver.getId() + " fue asignado a subway " + name);
             } else {
-                idList.remove(idList.size() - 1);
+                idDriverList.remove(idDriverList.size() - 1);
                 System.out.println("Driver de id=" + driver.getId() + " ya fue asignado previamente");
             }
         } catch (Exception e) {
@@ -230,34 +230,34 @@ public class Subway {
     public void assignTrainToLine(Train train, Line line) {
         try {
             // Evalua que line exista en subway
-            Line verifiedTrain = lines.stream()
+            Line verifiedLine = lines.stream()
                     .filter(e -> e.getId() == line.getId())
                     .findFirst()
                     .orElse(null);
 
             // Evalua que tren exista en subway
-            Train verifiedLine = trains.stream()
+            Train verifiedTrain = trains.stream()
                     .filter(e -> e.getId() == train.getId())
                     .findFirst()
                     .orElse(null);
 
-            if (verifiedTrain == null) {
+            if (verifiedLine == null) {
                 System.out.println("Line con id=" + line.getId() + " no encontrada");
                 return;
-            } else if (verifiedLine == null) {
+            } else if (verifiedTrain == null) {
                 System.out.println("Train con id=" + train.getId() + " no encontrado");
                 return;
             }
 
             // Obtiene lista de ids de trenes asignados
-            List<Integer> idTrainList = lines.stream()
+            List<Integer> assignedTrainIdList = lines.stream()
                     .flatMap(e -> e.getTrains().stream())
                     .map(Train::getId)
                     .collect(Collectors.toList());
 
             // Evaluar que train no este asignado previamente en alguna linea
-            if (!idTrainList.contains(train.getId())) {
-                verifiedTrain.addTrain(verifiedLine);
+            if (!assignedTrainIdList.contains(train.getId())) {
+                verifiedLine.addTrain(verifiedTrain);
                 System.out.println("Train id id=" + train.getId() + " fue asignado a line de id=" + line.getId());
             } else
                 System.out.println("Train con id=" + train.getId() + " ya esta asignado");
@@ -275,13 +275,13 @@ public class Subway {
                     .orElse(null);
 
             // Evalua que driver exista en subway
-            Driver verifiedLine = drivers.stream()
+            Driver verifiedDriver = drivers.stream()
                     .filter(e -> e.getId() == driver.getId())
                     .findFirst()
                     .orElse(null);
 
-            // Busca id de drivers asignados a trenes
-            List<Integer> idDriver = lines.stream()
+            // Busca id de drivers asigndados a trenes
+            List<Integer> assignerDriverIdList = lines.stream()
                     .flatMap(l -> l.getTrains().stream())
                     .map(Train::getDriverAssignment)
                     .filter(Objects::nonNull)
@@ -294,11 +294,11 @@ public class Subway {
             // Entrega resultados de evaluaciones ahteriores
             if (verifiedTrain == null) // El tren existe en subway?
                 System.out.println("Train con id=" + train.getId() + " no encontrado");
-            else if (verifiedLine == null) // La linea existe en subway?
+            else if (verifiedDriver == null) // La linea existe en subway?
                 System.out.println("Driver con id=" + driver.getId() + " no encontrado");
             else if (!Objects.equals(train.getTrainMaker(), driver.getTrainMaker())) // Trainmaker es igual en train y driver?
                 System.out.println("TrainMaker incompatible entre train de id= " + train.getId() + " y driver de id=" + driver.getId());
-            else if (idDriver.contains(driver.getId())) // Driver fue asignado previamente?
+            else if (assignerDriverIdList.contains(driver.getId())) // Driver fue asignado previamente?
                 System.out.println("Driver con id=" + driver.getId() + " ya esta asignado");
             else if (!util.stationBelongs(departureStation, train, lines)) // Estacion de salida existe en la linea asignada al tren?
                 System.out.println("Estacion " + departureStation.getName() + " no existe en la linea en cual esta asignado el tren de id=" + train.getId());
@@ -315,6 +315,32 @@ public class Subway {
     }
 
     public String whereIsTrain(int idTrain, Date time) {
+        var iAmHere = "No se donde estoy =(";
+        var lineName = "";
+        try {
+            // Evalua que line exista en subway
+            lineName = lines.stream()
+                    .filter(l -> l.getTrains().stream().anyMatch(t -> t.getId() == idTrain))
+                    .findFirst()
+                    .map(Line::getName)
+                    .orElse(null);
+            Station currentStation = calculateWhereIsTrain(idTrain, time);
+
+            if (lineName == null) {
+                System.out.println("La linea no tiene nombre asignado");
+            } else if (currentStation == null) {
+                System.out.println("No se pudo encontrar la estacion donde va el tren");
+            } else {
+                iAmHere = "El tren va en la estacion '" + currentStation.getName() + "' de la linea " + lineName;
+            }
+
+        } catch (Exception e) {
+            System.out.println("[whereIsTrain] error: " + e.getMessage());
+        }
+        return iAmHere;
+    }
+
+    public Station calculateWhereIsTrain(int idTrain, Date time) {
         try {
             // Busca que el tren que esta asignado en alguna linea
             Train verifiedTrain = lines.stream()
@@ -323,23 +349,27 @@ public class Subway {
                     .findFirst()
                     .orElse(null);
 
-            // Verifica que train haya sido encontrado en alguna linea
-            if (verifiedTrain == null) {
-                return "Train con id=" + idTrain + " no encontrado";
-            }
-
             // Busca las secciones que el tren va a recorrer
             List<Section> sectionList = lines.stream()
-                    .filter(e -> e.getTrains().stream().anyMatch(t -> t.getId() == idTrain))
+                    .filter(l -> l.getTrains().stream().anyMatch(t -> t.getId() == idTrain))
                     .findFirst()
                     .map(Line::getSections)
                     .orElse(null);
 
-            System.out.println(sectionList);
-
+            // Verifica que train haya sido encontrado en alguna linea
+            if (verifiedTrain == null || verifiedTrain.getDriverAssignment() == null) {
+                System.out.println("Train con id=" + idTrain + " no encontrado");
+            } else if (sectionList == null) {
+                System.out.println("La linea no tiene secciones asignadas");
+            } else if (util.getTotalTime(verifiedTrain.getDriverAssignment().getDepartureTime(), time) == 0) {
+                System.out.println("Ingrese de forma correcta el tiempo a consultar");
+            } else { // Si paso las verificaciones entrega la station
+                long totalTime = util.getTotalTime(verifiedTrain.getDriverAssignment().getDepartureTime(), time);
+                return util.trainMove(sectionList, totalTime, verifiedTrain);
+            }
         } catch (Exception e) {
-            System.out.println("[whereIsTrain] error: " + e.getMessage());
+            System.out.println("[calculateWhereIsTrain] error: " + e.getMessage());
         }
-        return "Train con id=" + idTrain + " encontrado";
+        return null;
     }
 }
