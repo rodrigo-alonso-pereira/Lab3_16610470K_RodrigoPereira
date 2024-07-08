@@ -374,21 +374,33 @@ public class Subway {
     }
 
     public List<Station> trainPath(int idTrain, Date time) {
-        Station currentStation = calculateWhereIsTrain(idTrain, time);
-        List<Section> sectionList = lines.stream()
-                .filter(l -> l.getTrains().stream().anyMatch(t -> t.getId() == idTrain))
-                .findFirst()
-                .map(Line::getSections)
-                .orElse(null);
-        List<Station> stationList = util.getStationList(sectionList);
-
         List<Station> finalStationList = new ArrayList<>();
-        var flag = false;
-        for (Station station : stationList) {
-            if (station.getId() == currentStation.getId() || flag) {
-                flag = true;
-                finalStationList.add(station);
+        try {
+            Station currentStation = calculateWhereIsTrain(idTrain, time); // Donde esta el tren
+            // Obtiene lista de secciones segun idTrain
+            List<Section> sectionList = lines.stream()
+                    .filter(l -> l.getTrains().stream().anyMatch(t -> t.getId() == idTrain))
+                    .findFirst()
+                    .map(Line::getSections)
+                    .orElse(null);
+
+            // Obtiene lista de estaciones
+            List<Station> stationList = util.getStationList(Objects.requireNonNull(sectionList));
+
+            // Verifica que exista stationList
+            if (stationList == null) {
+                System.out.println("La linea no tiene estaciones asignadas");
+            } else {
+                var flag = false;
+                for (Station station : stationList) {
+                    if (station.getId() == currentStation.getId() || flag) {
+                        flag = true;
+                        finalStationList.add(station);
+                    }
+                }
             }
+        } catch (Exception e) {
+            System.out.println("[trainPath] error: " + e.getMessage());
         }
         return finalStationList;
     }
