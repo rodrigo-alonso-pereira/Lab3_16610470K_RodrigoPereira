@@ -4,6 +4,7 @@ import cl.usach.Model.*;
 import cl.usach.Service.LineServiceImpl;
 import cl.usach.Service.TrainServiceImpl;
 import cl.usach.Util.Utililty;
+import cl.usach.Vista.Menu;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -18,7 +19,7 @@ import static cl.usach.Model.CarType.*;
 
 public class Main {
     public static void main(String[] args) throws ParseException {
-
+        /*
         // Datos station
         Station st0 = new Station(0, "San Alberto Hurtado", StationType.TERMINAL, 35);
         Station st1 = new Station(1, "USACH", COMBINACION, 30);
@@ -192,6 +193,12 @@ public class Main {
         System.out.println(sw0.whereIsTrain(1, date14)); // error por fecha mal ingresada
 
         System.out.println(sw0.trainPath(5, date11));
+        */
+        try {
+            Menu.iniciarMenu();
+        } catch (Exception e) {
+            System.out.println("[Main] error: " + e.getMessage());
+        }
 
 
     }
