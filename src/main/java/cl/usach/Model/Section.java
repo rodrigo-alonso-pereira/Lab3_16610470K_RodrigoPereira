@@ -7,6 +7,9 @@ public class Section {
     private double distance;
     private int cost;
 
+    public Section() {
+    }
+
     public Section(Station point1, Station point2, double distance, int cost) {
         this.point1 = point1;
         this.point2 = point2;
