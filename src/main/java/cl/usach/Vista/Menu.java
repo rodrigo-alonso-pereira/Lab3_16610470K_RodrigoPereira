@@ -30,14 +30,13 @@ public class Menu {
                 choice = input.nextInt();
                 switch (choice) {
                     case 1:
-                        case1();
+                        menuCase1();
                     case 2:
-                        printSpecificMenu2();
-                        //sw0.toString();
+                        menuCase2();
                     case 3:
                         printSpecificMenu3();
                     case 4:
-                        System.out.println("\nSaliendo del programa... adios!\n");
+                        System.out.println("\nSaliendo de la red de metro... adios!\n");
                         System.exit(0);
                     default:
                         System.out.println("\n\n\n--------------OPCION NO VALIDA-------------\n");
@@ -48,7 +47,7 @@ public class Menu {
         }
     }
 
-    private static void case1() {
+    private static void menuCase1() {
         try {
             Scanner input = new Scanner(System.in);
             int choiceCase1;
@@ -73,7 +72,31 @@ public class Menu {
                         System.out.println("Se seleccion opcion 4");
                         break;
                     case 5:
-                        System.out.println("\nVolviendo a menu general.\n");
+                        System.out.println("\nVolviendo a menu general...\n");
+                        iniciarMenu();
+                        break;
+                    default:
+                        System.out.println("\n\n\n--------------OPCION NO VALIDA-------------\n");
+                }
+            } while (true);
+        } catch (Exception e) {
+            System.out.println("[iniciarMenu] error: " + e.getMessage());
+        }
+    }
+
+    private static void menuCase2() {
+        try {
+            Scanner input = new Scanner(System.in);
+            int choiceCase2;
+            do {
+                printSpecificMenu2();
+                choiceCase2 = input.nextInt();
+                switch (choiceCase2) {
+                    case 1:
+                        System.out.println(subway.toString());
+                        break;
+                    case 2:
+                        System.out.println("\nVolviendo a menu general...\n");
                         iniciarMenu();
                         break;
                     default:
@@ -115,7 +138,7 @@ public class Menu {
         System.out.println("\nDefiniciones estructurales de su sistema subido desde archivos");
         System.out.println("\n1. Desplegar en pantalla el estado actual de la red de metros.");
         System.out.println("2. Retorno al menú de Inicio");
-        System.out.println("\nIngrese su opcion: ");
+        System.out.print("\nIngrese su opcion: ");
     }
 
     public static void printSpecificMenu3() {
