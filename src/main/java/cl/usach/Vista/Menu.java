@@ -1,8 +1,23 @@
 package cl.usach.Vista;
 
+import cl.usach.Model.Line;
+import cl.usach.Model.Section;
+import cl.usach.Model.Station;
+import cl.usach.Model.Subway;
+import cl.usach.Repository.Repository;
+import cl.usach.Repository.TxtRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
+
+    static TxtRepository txtRepository = new TxtRepository();
+    static Subway subway;
+    static ArrayList<Station> stationList = new ArrayList<>();
+    static ArrayList<Section> sectionList = new ArrayList<>();
+    static ArrayList<Line> lineList = new ArrayList<>();
 
     // Metodos propios de menu
     public static void iniciarMenu() {
@@ -15,24 +30,56 @@ public class Menu {
                 choice = input.nextInt();
                 switch (choice) {
                     case 1:
-                        printSpecificMenu1();
-                        break;
+                        case1();
                     case 2:
                         printSpecificMenu2();
                         //sw0.toString();
-                        break;
                     case 3:
                         printSpecificMenu3();
-                        break;
                     case 4:
                         System.out.println("\nSaliendo del programa... adios!\n");
                         System.exit(0);
+                    default:
+                        System.out.println("\n\n\n--------------OPCION NO VALIDA-------------\n");
+                }
+            } while (choice != MENU_EXIT_OPTION);
+        } catch (Exception e) {
+            System.out.println("[iniciarMenu] error: " + e.getMessage());
+        }
+    }
+
+    private static void case1() {
+        try {
+            Scanner input = new Scanner(System.in);
+            int choiceCase1;
+            do {
+                printSpecificMenu1();
+                choiceCase1 = input.nextInt();
+                switch (choiceCase1) {
+                    case 1:
+                        subway = new Subway(0, "Metro de Santiago");
+                        stationList = txtRepository.importStation();
+                        sectionList = txtRepository.importSection();
+                        lineList = txtRepository.importLine();
+                        subway.addLine(lineList);
+                        break;
+                    case 2:
+                        System.out.println("Se seleccion opcion 2");
+                        break;
+                    case 3:
+                        System.out.println("Se seleccion opcion 3");
+                        break;
+                    case 4:
+                        System.out.println("Se seleccion opcion 4");
+                        break;
+                    case 5:
+                        System.out.println("\nVolviendo a menu general.\n");
+                        iniciarMenu();
                         break;
                     default:
                         System.out.println("\n\n\n--------------OPCION NO VALIDA-------------\n");
-                        break;
                 }
-            } while (choice != MENU_EXIT_OPTION);
+            } while (true);
         } catch (Exception e) {
             System.out.println("[iniciarMenu] error: " + e.getMessage());
         }
@@ -54,6 +101,7 @@ public class Menu {
         System.out.println("---------------------------------------------------------------");
         System.out.println("\nDefiniciones estructurales de su sistema subido desde archivos");
         System.out.println("\n1. Creación de una línea de metro básica (cargar archivo lineas.txt)");
+        // TODO: Archivo con lineas que tengan combinacion (agregar una validacion)
         System.out.println("2. Combinaciones entre estaciones entre Líneas (cargar archivo combinaciones.txt)");
         System.out.println("3. Definición de trenes con distintos número de carros (cargar archivo trenes.txt)");
         System.out.println("4. Conductores asignados a una Línea (cargar archivo conductores.txt)");

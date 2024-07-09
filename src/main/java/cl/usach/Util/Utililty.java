@@ -194,4 +194,13 @@ public class Utililty {
         return sectionList.get(sectionList.size()-1).getPoint2(); // Si termino y queda tiempo, retorna estacion final de linea
     }
 
+    public Station findStation(List<Station> stations, int stationId) {
+        Station station = stations.stream().filter(e -> e.getId() == stationId).findFirst().orElse(null);
+        if (station != null) {
+            return station;
+        } else
+            System.out.println("[findStation] Station de id=" + stationId + " no encontrado");
+        return null;
+    }
+
 }
