@@ -19,6 +19,9 @@ public class Subway {
     private List<Train> trains;
     private List<Driver> drivers;
 
+    public Subway() {
+    }
+
     public Subway(int id, String name) {
         this.id = id;
         this.name = name;
