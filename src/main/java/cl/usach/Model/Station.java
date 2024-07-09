@@ -6,6 +6,9 @@ public class Station {
     private StationType stationType;
     private int stopTime;
 
+    public Station() {
+    }
+
     public Station(int id, String name, StationType stationType, int stopTime) {
         this.id = id;
         this.name = name;
