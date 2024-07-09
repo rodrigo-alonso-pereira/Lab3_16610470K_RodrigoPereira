@@ -11,6 +11,9 @@ public class Line {
     private ArrayList<Section> sections;
     private ArrayList<Train> trains;
 
+    public Line() {
+    }
+
     public Line(int id, String name, String railType, ArrayList<Section> sections) {
         this.id = id;
         this.name = name;
