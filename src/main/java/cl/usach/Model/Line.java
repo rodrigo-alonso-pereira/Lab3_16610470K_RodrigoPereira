@@ -85,14 +85,12 @@ public class Line {
      *
      * @return
      */
-    //TODO: Averiguar si es total distancia o total estaciones
     public double lineLength() {
         double length = 0;
         for (Section section : sections) {
             length += section.getDistance();
         }
         return length;
-        //return  sections.size();
     }
 
     /**

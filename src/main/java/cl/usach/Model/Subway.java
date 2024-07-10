@@ -79,10 +79,10 @@ public class Subway {
             idLineList.add(train.getId());
             if (trainService.isTrain(train) && util.isRepeatElement(idLineList)) {
                 trains.add(train);
-                System.out.println("Train de id=" + train.getId() + " fue asignado a subway " + name);
+                System.out.println("Train de id=" + train.getId() + " fue asignado a subway '" + name + "'");
             } else {
                 idLineList.remove(idLineList.size() - 1);
-                System.out.println("Train de id=" + train.getId() + " ya fue asignado previamente o no cumple con condiciones para ser un tren valido");
+                System.out.println("Train de id=" + train.getId() + " ya fue asignado previamente a subway '" + name + "' o no cumple con condiciones para ser un tren valido");
             }
         }
     }
@@ -96,10 +96,10 @@ public class Subway {
             idTrainList.add(train.getId());
             if (trainService.isTrain(train) && util.isRepeatElement(idTrainList)) {
                 trains.add(train);
-                System.out.println("Train de id=" + train.getId() + " fue asignado a subway " + name);
+                System.out.println("Train de id=" + train.getId() + " fue asignado a subway '" + name + "'");
             } else {
                 idTrainList.remove(idTrainList.size() - 1);
-                System.out.println("Train de id=" + train.getId() + " ya fue asignado previamente o no cumple con condiciones para ser un tren valido");
+                System.out.println("Train de id=" + train.getId() + " ya fue asignado previamente a subway '" + name + "' o no cumple con condiciones para ser un tren valido");
             }
         } catch (Exception e) {
             System.out.println("[addTrain] error: " + e.getMessage());
@@ -116,10 +116,10 @@ public class Subway {
                 idLineList.add(line.getId());
                 if (lineService.isLine(line) && util.isRepeatElement(idLineList)) {
                     lines.add(line);
-                    System.out.println("Line de id=" + line.getId() + " fue asignado a subway " + name);
+                    System.out.println("Line de id=" + line.getId() + " fue asignado a subway '" + name + "'");
                 } else {
                     idLineList.remove(idLineList.size() - 1);
-                    System.out.println("Line de id=" + line.getId() + " ya fue asignado previamente o no cumple con condiciones para ser un line valido");
+                    System.out.println("Line de id=" + line.getId() + " ya fue asignado previamente a subway '" + name + "' o no cumple con condiciones para ser un line valido");
                 }
             }
         } catch (Exception e) {
@@ -136,10 +136,10 @@ public class Subway {
             idLineList.add(line.getId());
             if (lineService.isLine(line) && util.isRepeatElement(idLineList)) {
                 lines.add(line);
-                System.out.println("Line de id=" + line.getId() + " fue asignado a subway " + name);
+                System.out.println("Line de id=" + line.getId() + " fue asignado a subway '" + name + "'");
             } else {
                 idLineList.remove(idLineList.size() - 1);
-                System.out.println("Line de id=" + line.getId() + " ya fue asignado previamente o no cumple con condiciones para ser un line valido");
+                System.out.println("Line de id=" + line.getId() + " ya fue asignado previamente a subway '" + name + "' o no cumple con condiciones para ser un line valido");
             }
         } catch (Exception e) {
             System.out.println("[addLine] error: " + e.getMessage());
@@ -159,7 +159,7 @@ public class Subway {
                     System.out.println("Driver de id=" + d.getId() + " fue asignado a subway " + name);
                 } else {
                     idDriverList.remove(idDriverList.size() - 1);
-                    System.out.println("Driver de id=" + d.getId() + " ya fue asignado previamente");
+                    System.out.println("Driver de id=" + d.getId() + " ya fue asignado previamente a subway '" + name + "'");
                 }
             }
         } catch (Exception e) {
@@ -179,7 +179,7 @@ public class Subway {
                 System.out.println("Driver de id=" + driver.getId() + " fue asignado a subway " + name);
             } else {
                 idDriverList.remove(idDriverList.size() - 1);
-                System.out.println("Driver de id=" + driver.getId() + " ya fue asignado previamente");
+                System.out.println("Driver de id=" + driver.getId() + " ya fue asignado previamente a subway '" + name + "'");
             }
         } catch (Exception e) {
             System.out.println("[addDriver] error: " + e.getMessage());
