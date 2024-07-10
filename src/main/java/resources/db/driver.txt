@@ -1,0 +1,6 @@
+0,Eren Yeager,CAF
+1,Oliver Atom,ALSTOM
+2,Kakaroto,CAF
+3,Levy Ackerman,ALSTOM
+4,Hanamichi Sakuragi,CAF
+5,Monkey D. Luffy,ALSTOM

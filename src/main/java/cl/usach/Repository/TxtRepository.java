@@ -16,11 +16,13 @@ public class TxtRepository extends Repository {
     final String pathCombinationLine = "src/main/java/resources/db/combinationLine.txt";
     final String pathPassengerCar = "src/main/java/resources/db/passengerCar.txt";
     final String pathTrain = "src/main/java/resources/db/train.txt";
+    final String pathDriver = "src/main/java/resources/db/driver.txt";
     static ArrayList<Station> stations;
     static ArrayList<Section> sections;
     static ArrayList<Line> lines;
     static ArrayList<PassengerCar> passengerCars;
     static ArrayList<Train> trains;
+    static ArrayList<Driver> drivers;
     static Utililty util = new Utililty();
 
     /**
@@ -279,5 +281,40 @@ public class TxtRepository extends Repository {
             System.out.println("[importTrain] error: " + e.getMessage());
         }
         return trains;
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public ArrayList<Driver> importDriver() {
+        String[] arrayData;
+        drivers = new ArrayList<>();
+        try {
+            File archivo = new File(pathDriver);
+            if (archivo.exists()) {
+                FileReader fr = new FileReader(archivo);
+                BufferedReader br = new BufferedReader(fr);
+                String data = br.readLine();
+
+                while (data != null) {
+                    Driver driver = new Driver();
+                    arrayData = data.split(",");
+                    driver.setId(Integer.parseInt(arrayData[0]));
+                    driver.setName(arrayData[1]);
+                    driver.setTrainMaker(arrayData[2]);
+                    drivers.add(driver);
+                    data = br.readLine();
+                }
+                System.out.println("[importDriver] Drivers cargados correctamente");
+                br.close();
+            } else {
+                System.out.println("[importDriver] Archivo no encontrado");
+            }
+        } catch (Exception e) {
+            System.out.println("[importDriver] error: " + e.getMessage());
+        }
+        return drivers;
     }
 }

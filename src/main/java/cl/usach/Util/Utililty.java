@@ -208,4 +208,33 @@ public class Utililty {
         return null;
     }
 
+    public Train findTrain(Subway subway, int trainId) {
+        Train train = subway.getTrains().stream().filter(e -> e.getId() == trainId).findFirst().orElse(null);
+        if (train != null) {
+            return train;
+        } else
+            System.out.println("[findTrain] Train de id=" + trainId + " no encontrado");
+        return null;
+    }
+
+    public Line findLine(Subway subway, int lineId) {
+        Line line = subway.getLines().stream().filter(e -> e.getId() == lineId).findFirst().orElse(null);
+        if (line != null) {
+            return line;
+        } else
+            System.out.println("[findLine] Line de id=" + lineId + " no encontrado");
+        return null;
+    }
+
+    public Driver findriver(Subway subway, int driverId) {
+        Driver driver = subway.getDrivers().stream().filter(e -> e.getId() == driverId).findFirst().orElse(null);
+        if (driver != null) {
+            return driver;
+        } else
+            System.out.println("[findLine] Line de id=" + driverId + " no encontrado");
+        return null;
+    }
+
+
+
 }

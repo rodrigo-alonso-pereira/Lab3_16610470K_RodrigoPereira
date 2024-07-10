@@ -61,12 +61,12 @@ public class PassengerCar {
 
     @Override
     public String toString() {
-        return "PassengerCar{" +
+        return "PassengerCar_[" +
                 "id=" + id +
                 ", passengerCapacity=" + passengerCapacity +
                 ", model='" + model + '\'' +
                 ", trainMaker='" + trainMaker + '\'' +
                 ", carType=" + carType +
-                '}';
+                ']';
     }
 }

@@ -13,4 +13,5 @@ public abstract class Repository {
     public abstract ArrayList<Line> importCombinationLine ();
     public abstract ArrayList<PassengerCar> importPassengerCar();
     public abstract ArrayList<Train> importTrain();
+    public abstract ArrayList<Driver> importDriver();
 }

@@ -50,11 +50,11 @@ public class DriverAssignment {
 
     @Override
     public String toString() {
-        return "TrainAssignment{" +
+        return "TrainAssignment_[" +
                 "driver=" + driver +
                 ", departureTime=" + departureTime +
                 ", departureStation=" + departureStation +
                 ", arrivalStation=" + arrivalStation +
-                '}';
+                ']';
     }
 }

@@ -2,12 +2,17 @@ package cl.usach.Vista;
 
 import cl.usach.Model.*;
 import cl.usach.Repository.TxtRepository;
+import cl.usach.Util.Utililty;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Menu {
 
+    static Utililty util = new Utililty();
     static TxtRepository txtRepository = new TxtRepository();
     static Subway subway;
     static ArrayList<Station> stationList = new ArrayList<>();
@@ -15,6 +20,8 @@ public class Menu {
     static ArrayList<Line> lineList = new ArrayList<>();
     static ArrayList<PassengerCar> passengerCarList = new ArrayList<>();
     static ArrayList<Train> trainList = new ArrayList<>();
+    static ArrayList<Driver> driverList = new ArrayList<>();
+    static DateFormat sdf = new SimpleDateFormat("hh:mm aa");
 
     // Metodos propios de menu
     public static void iniciarMenu() {
@@ -66,10 +73,61 @@ public class Menu {
                     case 3:
                         passengerCarList = txtRepository.importPassengerCar();
                         trainList = txtRepository.importTrain();
-                        subway.addTrain(trainList);
+                        subway.addTrain(trainList); // Se agregan lista de train a line
+                        // Asignacion de trenes a lineas
+                        subway.assignTrainToLine(util.findTrain(subway, 1), util.findLine(subway, 1));
+                        subway.assignTrainToLine(util.findTrain(subway, 0), util.findLine(subway, 2));
+                        subway.assignTrainToLine(util.findTrain(subway, 1), util.findLine(subway, 6)); // t1 ya esta asignado
+                        subway.assignTrainToLine(util.findTrain(subway, 2), util.findLine(subway, 6)); // t2 no cumple con ser tren valido
+                        subway.assignTrainToLine(util.findTrain(subway, 3), util.findLine(subway, 6));
+                        subway.assignTrainToLine(util.findTrain(subway, 5), util.findLine(subway, 1));
+                        subway.assignTrainToLine(util.findTrain(subway, 4), util.findLine(subway, 2));
                         break;
                     case 4:
-                        System.out.println("Se seleccion opcion 4");
+                        driverList = txtRepository.importDriver();
+                        subway.addDriver(driverList); // Se agregan drivers a subway
+                        // Asignacion de driver a trenes
+                        Date date1 = sdf.parse("01:30 pm");
+                        Date date2 = sdf.parse("09:00 am");
+                        Date date3 = sdf.parse("02:00 pm");
+                        Date date4 = sdf.parse("06:00 am");
+                        Date date5 = sdf.parse("10:00 pm");
+                        subway.assignDriverToTrain(
+                                util.findTrain(subway, 1),
+                                util.findriver(subway, 1),
+                                date1,
+                                util.findStation(stationList, 10),
+                                util.findStation(stationList, 8)); // No existe st10 en line 1
+                        subway.assignDriverToTrain(
+                                util.findTrain(subway, 1),
+                                util.findriver(subway, 1),
+                                date1,
+                                util.findStation(stationList, 0),
+                                util.findStation(stationList, 8));
+                        subway.assignDriverToTrain(
+                                util.findTrain(subway, 5),
+                                util.findriver(subway, 3),
+                                date2,
+                                util.findStation(stationList, 0),
+                                util.findStation(stationList, 8));
+                        subway.assignDriverToTrain(
+                                util.findTrain(subway, 3),
+                                util.findriver(subway, 0),
+                                date3,
+                                util.findStation(stationList, 20),
+                                util.findStation(stationList, 24));
+                        subway.assignDriverToTrain(
+                                util.findTrain(subway, 4),
+                                util.findriver(subway, 4),
+                                date4,
+                                util.findStation(stationList, 10),
+                                util.findStation(stationList, 19));
+                        subway.assignDriverToTrain(
+                                util.findTrain(subway, 5),
+                                util.findriver(subway, 2),
+                                date5,
+                                util.findStation(stationList, 10),
+                                util.findStation(stationList, 13)); // Incompatible trainMaker ALSTOM != CAF
                         break;
                     case 5:
                         System.out.println("\nVolviendo a menu general...\n");
@@ -123,11 +181,10 @@ public class Menu {
         System.out.println("\n\n### Sistema Metro - Cargar información del sistema de metro ###");
         System.out.println("---------------------------------------------------------------");
         System.out.println("\nDefiniciones estructurales de su sistema subido desde archivos");
-        System.out.println("\n1. Creación de una línea de metro básica (cargar archivo lineas.txt)");
-        // TODO: Archivo con lineas que tengan combinacion (agregar una validacion)
-        System.out.println("2. Combinaciones entre estaciones entre Líneas (cargar archivo combinaciones.txt)");
-        System.out.println("3. Definición de trenes con distintos número de carros (cargar archivo trenes.txt)");
-        System.out.println("4. Conductores asignados a una Línea (cargar archivo conductores.txt)");
+        System.out.println("\n1. Creación de una línea de metro básica");
+        System.out.println("2. Combinaciones entre estaciones entre Líneas");
+        System.out.println("3. Definición de trenes con distintos número de carros");
+        System.out.println("4. Conductores asignados a una Línea");
         System.out.println("5. Retorno al menú de Inicio");
         System.out.print("\nIngrese su opcion: ");
     }

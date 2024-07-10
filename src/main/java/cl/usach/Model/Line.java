@@ -13,6 +13,7 @@ public class Line {
     private ArrayList<Train> trains;
 
     public Line() {
+        this.trains = new ArrayList<>();
     }
 
     public Line(int id, String name, String railType, ArrayList<Section> sections) {
@@ -69,13 +70,13 @@ public class Line {
 
     @Override
     public String toString() {
-        return "Line{" +
+        return "Line_[" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", railType='" + railType + '\'' +
                 ", sections=" + sections +
                 ", trains=" + trains +
-                '}';
+                ']';
     }
 
     // Metodos Propios Line

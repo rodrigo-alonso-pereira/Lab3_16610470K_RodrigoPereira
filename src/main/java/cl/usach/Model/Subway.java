@@ -221,16 +221,6 @@ public class Subway {
                 "drivers = [" + '\n' + driverString + "]\n";
     }
 
-    public String toString2() {
-        return "Subway{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", lines=" + lines +
-                ", trains=" + trains +
-                ", drivers=" + drivers +
-                '}';
-    }
-
     /**
      * @param train
      * @param line
@@ -257,18 +247,25 @@ public class Subway {
                 return;
             }
 
-            // Obtiene lista de ids de trenes asignados
-            List<Integer> assignedTrainIdList = lines.stream()
-                    .flatMap(e -> e.getTrains().stream())
-                    .map(Train::getId)
-                    .collect(Collectors.toList());
-
-            // Evaluar que train no este asignado previamente en alguna linea
-            if (!assignedTrainIdList.contains(train.getId())) {
+            // Evalua si es primera asignacion
+            boolean isFirstAssignment = lines.stream().allMatch(l -> l.getTrains().isEmpty());
+            if (isFirstAssignment) {
                 verifiedLine.addTrain(verifiedTrain);
-                System.out.println("Train id id=" + train.getId() + " fue asignado a line de id=" + line.getId());
-            } else
-                System.out.println("Train con id=" + train.getId() + " ya esta asignado");
+            } else {
+                // Obtiene lista de ids de trenes asignados
+                List<Integer> assignedTrainIdList = lines.stream()
+                        .filter(l -> !l.getTrains().isEmpty())
+                        .flatMap(l -> l.getTrains().stream())
+                        .map(Train::getId)
+                        .collect(Collectors.toList());
+
+                // Evaluar que train no este asignado previamente en alguna linea
+                if (!assignedTrainIdList.contains(train.getId())) {
+                    verifiedLine.addTrain(verifiedTrain);
+                    System.out.println("Train id id=" + train.getId() + " fue asignado a line de id=" + line.getId());
+                } else
+                    System.out.println("Train con id=" + train.getId() + " ya esta asignado");
+            }
         } catch (Exception e) {
             System.out.println("[assignTrainToLine] error: " + e.getMessage());
         }
@@ -309,9 +306,9 @@ public class Subway {
             else if (assignerDriverIdList.contains(driver.getId())) // Driver fue asignado previamente?
                 System.out.println("Driver con id=" + driver.getId() + " ya esta asignado");
             else if (!util.stationBelongs(departureStation, train, lines)) // Estacion de salida existe en la linea asignada al tren?
-                System.out.println("Estacion " + departureStation.getName() + " no existe en la linea en cual esta asignado el tren de id=" + train.getId());
+                System.out.println("Estacion '" + departureStation.getName() + "' no existe en la linea en cual esta asignado el tren de id=" + train.getId());
             else if (!util.stationBelongs(arrivalStation, train, lines)) // Estacion de llegada existe en la linea asignada al tren?
-                System.out.println("Estacion " + arrivalStation.getName() + " no existe en la linea en cual esta asignado el tren de id=" + train.getId());
+                System.out.println("Estacion '" + arrivalStation.getName() + "' no existe en la linea en cual esta asignado el tren de id=" + train.getId());
             else { // Si lo anterio es validad, se crea y asigna driverAssignment a Train
                 DriverAssignment driverAssignment = new DriverAssignment(driver, departureTime, departureStation, arrivalStation);
                 verifiedTrain.setDriverAssignment(driverAssignment);

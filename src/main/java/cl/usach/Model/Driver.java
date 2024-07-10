@@ -41,10 +41,10 @@ public class Driver {
 
     @Override
     public String toString() {
-        return "Driver{" +
+        return "Driver_[" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", trainMaker='" + trainMaker + '\'' +
-                '}';
+                ']';
     }
 }
