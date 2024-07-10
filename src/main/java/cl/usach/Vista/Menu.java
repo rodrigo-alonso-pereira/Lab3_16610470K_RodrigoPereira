@@ -2,6 +2,7 @@ package cl.usach.Vista;
 
 import cl.usach.Model.*;
 import cl.usach.Repository.TxtRepository;
+import cl.usach.Service.LineServiceImpl;
 import cl.usach.Util.Utililty;
 
 import java.text.DateFormat;
@@ -14,6 +15,7 @@ public class Menu {
 
     static Utililty util = new Utililty();
     static TxtRepository txtRepository = new TxtRepository();
+    static LineServiceImpl lineService = new LineServiceImpl();
     static Subway subway;
     static ArrayList<Station> stationList = new ArrayList<>();
     static ArrayList<Section> sectionList = new ArrayList<>();
@@ -170,20 +172,20 @@ public class Menu {
     }
 
     private static void menuCase3() {
-        Scanner input = new Scanner(System.in);
-        Scanner inputS = new Scanner(System.in);
+        Scanner inputI = new Scanner(System.in); // Input para numeros
+        Scanner inputS = new Scanner(System.in); // Input para Strings
         try {
             int choiceCase3;
             do {
                 printSpecificMenu3();
-                choiceCase3 = input.nextInt();
+                choiceCase3 = inputI.nextInt();
                 switch (choiceCase3) {
                     case 1:
                         try {
                             int lineId;
                             System.out.println("\n---------------LARGO LINEA----------------\n");
                             System.out.print("Ingresa el id (number) de la linea que desea consultar su largo: ");
-                            lineId = input.nextInt();
+                            lineId = inputI.nextInt();
                             Line line = util.findLine(subway, lineId);
                             if (line != null)
                                 // lineId = 1, largo = 18.4
@@ -215,8 +217,8 @@ public class Menu {
                         try {
                             int lineId;
                             System.out.println("\n---------------COSTO LINEA----------------\n");
-                            System.out.print("Ingresa el id (number) de la linea que desea consultar su largo: ");
-                            lineId = input.nextInt();
+                            System.out.print("Ingresa el id (number) de la linea que desea consultar su cost: ");
+                            lineId = inputI.nextInt();
                             Line line = util.findLine(subway, lineId);
                             if (line != null)
                                 // lineId = 1, costo = 335
@@ -245,7 +247,20 @@ public class Menu {
                         }
                         break;
                     case 5:
-                        System.out.println("Seleccion opcion 5");
+                        try {
+                            int lineId;
+                            System.out.println("\n---------------¿ES LINEA?----------------\n");
+                            System.out.print("Ingresa el id (number) de la linea que desea evaluar: ");
+                            lineId = inputI.nextInt();
+                            Line line = util.findLine(subway, lineId);
+                            if (line != null)
+                                // lineId = 1, true
+                                System.out.println("La linea de id=" + lineId + (lineService.isLine(line)? " es una linea valida" : "no es una linea valida"));
+                            else
+                                System.out.println("Vuelva a intentarlo");
+                        } catch (Exception e) {
+                            System.out.println("[opcion3.lineCost] error: " + e.getMessage());
+                        }
                         break;
                     case 6:
                         System.out.println("Seleccion opcion 6");
@@ -276,7 +291,7 @@ public class Menu {
         } catch (Exception e) {
             System.out.println("[iniciarMenu] error: " + e.getMessage());
         }
-        input.close();
+        inputI.close();
         inputS.close();
     }
 
