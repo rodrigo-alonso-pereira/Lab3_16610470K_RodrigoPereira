@@ -97,37 +97,37 @@ public class Menu {
                         Date date5 = sdf.parse("10:00 pm");
                         subway.assignDriverToTrain(
                                 util.findTrain(subway, 1),
-                                util.findriver(subway, 1),
+                                util.findDriver(subway, 1),
                                 date1,
                                 util.findStation(stationList, 10),
                                 util.findStation(stationList, 8)); // No existe st10 en line 1
                         subway.assignDriverToTrain(
                                 util.findTrain(subway, 1),
-                                util.findriver(subway, 1),
+                                util.findDriver(subway, 1),
                                 date1,
                                 util.findStation(stationList, 0),
                                 util.findStation(stationList, 8));
                         subway.assignDriverToTrain(
                                 util.findTrain(subway, 5),
-                                util.findriver(subway, 3),
+                                util.findDriver(subway, 3),
                                 date2,
                                 util.findStation(stationList, 0),
                                 util.findStation(stationList, 8));
                         subway.assignDriverToTrain(
                                 util.findTrain(subway, 3),
-                                util.findriver(subway, 0),
+                                util.findDriver(subway, 0),
                                 date3,
                                 util.findStation(stationList, 20),
                                 util.findStation(stationList, 24));
                         subway.assignDriverToTrain(
                                 util.findTrain(subway, 4),
-                                util.findriver(subway, 4),
+                                util.findDriver(subway, 4),
                                 date4,
                                 util.findStation(stationList, 10),
                                 util.findStation(stationList, 19));
                         subway.assignDriverToTrain(
                                 util.findTrain(subway, 5),
-                                util.findriver(subway, 2),
+                                util.findDriver(subway, 2),
                                 date5,
                                 util.findStation(stationList, 10),
                                 util.findStation(stationList, 13)); // Incompatible trainMaker ALSTOM != CAF
@@ -243,7 +243,7 @@ public class Menu {
                             System.out.println("El costo de la linea entre la estacion '" + station1Name + "' y estacion '"
                                     + station2Name + "' es: " + line.lineSectionCost(station1Name, station2Name) + "K USD");
                         } catch (Exception e) {
-                            System.out.println("[opcion3.lineLength] error: " + e.getMessage());
+                            System.out.println("[opcion3.lineSectionCost] error: " + e.getMessage());
                         }
                         break;
                     case 5:
@@ -259,11 +259,43 @@ public class Menu {
                             else
                                 System.out.println("Vuelva a intentarlo");
                         } catch (Exception e) {
-                            System.out.println("[opcion3.lineCost] error: " + e.getMessage());
+                            System.out.println("[opcion3.isLine] error: " + e.getMessage());
                         }
                         break;
                     case 6:
-                        System.out.println("Seleccion opcion 6");
+                        try {
+                            int passengerCarId;
+                            int trainId;
+                            int position;
+                            System.out.println("\n---------------AGREGAR CARRO A TREN----------------\n");
+                            System.out.println("Lista de Carros disponibles:");
+                            for (PassengerCar passengerCar : passengerCarList) {
+                                System.out.println("-> " + passengerCar.toString());
+                            }
+                            System.out.print("\nIngresa el id (number) del carro que desea agregar: ");
+                            passengerCarId = inputI.nextInt();
+                            PassengerCar passengerCar = util.findPassengerCar(passengerCarList, passengerCarId);
+
+                            System.out.println("\nLista de Trenes disponibles:");
+                            for (Train train : trainList) {
+                                System.out.println("-> " + train.toString());
+                            }
+                            System.out.print("\nIngresa el id (number) del tren al cual desea agregar el carro: ");
+                            trainId = inputI.nextInt();
+                            Train train = util.findTrain(subway, trainId);
+
+                            System.out.print("\nIngrese la posicion donde desea ser agregado el carro: ");
+                            position = inputI.nextInt();
+
+                            if (passengerCar != null || train != null) {
+                                train.addCar(passengerCar, position);
+                                System.out.println("Se agrego con exito el carro de id=" + passengerCarId
+                                        + " en la posicion [" + position + "]" + " a el tren de id=" + trainId);
+                            } else
+                                System.out.println("Vuelva a intentarlo");
+                        } catch (Exception e) {
+                            System.out.println("[opcion3.lineCost] error: " + e.getMessage());
+                        }
                         break;
                     case 7:
                         System.out.println("Seleccion opcion 7");

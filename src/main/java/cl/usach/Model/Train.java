@@ -89,9 +89,11 @@ public class Train {
      *
      * @param car
      */
-    // TODO: Revisar las excepciones cuando posicion esta fuera del tamaño de lista
     public void addCar(PassengerCar car, int position) {
-        carList.add(position, car);
+        if (carList.size() >= position) {
+            carList.add(position, car);
+        } else
+            System.out.println("[addCar] La posicion elejida [" + position + "] no es valida");
     }
 
     public int fetchCapacity() {

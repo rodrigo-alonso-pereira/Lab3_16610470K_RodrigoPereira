@@ -241,12 +241,21 @@ public class Utililty {
         return null;
     }
 
-    public Driver findriver(Subway subway, int driverId) {
+    public Driver findDriver(Subway subway, int driverId) {
         Driver driver = subway.getDrivers().stream().filter(e -> e.getId() == driverId).findFirst().orElse(null);
         if (driver != null) {
             return driver;
         } else
             System.out.println("[findLine] Line de id=" + driverId + " no encontrado");
+        return null;
+    }
+
+    public PassengerCar findPassengerCar(List<PassengerCar> passengerCarList, int passengerCarId) {
+        PassengerCar passengerCar = passengerCarList.stream().filter(p -> p.getId() == passengerCarId).findFirst().orElse(null);
+        if (passengerCar != null) {
+            return passengerCar;
+        } else
+            System.out.println("[findPassengerCar] PassengerCar de id=" + passengerCarId + " no encontrado");
         return null;
     }
 
