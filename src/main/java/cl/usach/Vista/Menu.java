@@ -228,7 +228,21 @@ public class Menu {
                         }
                         break;
                     case 4:
-                        System.out.println("Seleccion opcion 4");
+                        try {
+                            String station1Name = "";
+                            String station2Name = "";
+                            System.out.println("\n---------------COSTO LINEA ENTRE ESTACIONES----------------\n");
+                            System.out.print("Ingresa el nombre de la estacion inicial: ");
+                            station1Name = inputS.nextLine().trim();
+                            System.out.print("\nIngresa el nombre de la estacion final: ");
+                            station2Name = inputS.nextLine().trim();
+                            Line line = util.findLineByStations(subway, station1Name, station2Name);
+                            // station1Name = USACH, station2Name = La Moneda -> costo = 225
+                            System.out.println("El costo de la linea entre la estacion '" + station1Name + "' y estacion '"
+                                    + station2Name + "' es: " + line.lineSectionCost(station1Name, station2Name) + "K USD");
+                        } catch (Exception e) {
+                            System.out.println("[opcion3.lineLength] error: " + e.getMessage());
+                        }
                         break;
                     case 5:
                         System.out.println("Seleccion opcion 5");
