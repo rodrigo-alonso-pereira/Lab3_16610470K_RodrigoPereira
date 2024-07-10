@@ -1,8 +1,6 @@
 package cl.usach.Repository;
 
-import cl.usach.Model.Line;
-import cl.usach.Model.Section;
-import cl.usach.Model.Station;
+import cl.usach.Model.*;
 
 import java.util.ArrayList;
 
@@ -13,4 +11,6 @@ public abstract class Repository {
     public abstract ArrayList<Section> importSection();
     public abstract ArrayList<Line> importLine ();
     public abstract ArrayList<Line> importCombinationLine ();
+    public abstract ArrayList<PassengerCar> importPassengerCar();
+    public abstract ArrayList<Train> importTrain();
 }

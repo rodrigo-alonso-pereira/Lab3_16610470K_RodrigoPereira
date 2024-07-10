@@ -1,14 +1,9 @@
 package cl.usach.Vista;
 
-import cl.usach.Model.Line;
-import cl.usach.Model.Section;
-import cl.usach.Model.Station;
-import cl.usach.Model.Subway;
-import cl.usach.Repository.Repository;
+import cl.usach.Model.*;
 import cl.usach.Repository.TxtRepository;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
@@ -18,6 +13,8 @@ public class Menu {
     static ArrayList<Station> stationList = new ArrayList<>();
     static ArrayList<Section> sectionList = new ArrayList<>();
     static ArrayList<Line> lineList = new ArrayList<>();
+    static ArrayList<PassengerCar> passengerCarList = new ArrayList<>();
+    static ArrayList<Train> trainList = new ArrayList<>();
 
     // Metodos propios de menu
     public static void iniciarMenu() {
@@ -67,7 +64,9 @@ public class Menu {
                         subway.addLine(txtRepository.importCombinationLine());
                         break;
                     case 3:
-                        System.out.println("Se seleccion opcion 3");
+                        passengerCarList = txtRepository.importPassengerCar();
+                        trainList = txtRepository.importTrain();
+                        subway.addTrain(trainList);
                         break;
                     case 4:
                         System.out.println("Se seleccion opcion 4");

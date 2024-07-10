@@ -73,14 +73,14 @@ public class Train {
 
     @Override
     public String toString() {
-        return "Train{" +
+        return "Train_[" +
                 "id=" + id +
                 ", trainMaker='" + trainMaker + '\'' +
                 ", speed=" + speed +
                 ", stationStayTime=" + stationStayTime +
                 ", carList=" + carList +
                 ", driverAssignment=" + driverAssignment +
-                '}';
+                ']';
     }
 
     // Metodos propios de train

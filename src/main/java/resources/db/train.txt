@@ -1,0 +1,6 @@
+0,CAF,60,60,passengerCarList0
+1,ALSTOM,70,120,passengerCarList1
+2,ALSTOM,70,90,passengerCarList2
+3,CAF,80,100,passengerCarList3
+4,CAF,65,70,passengerCarList0
+5,ALSTOM,75,50,passengerCarList1

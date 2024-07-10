@@ -51,11 +51,11 @@ public class Section {
 
     @Override
     public String toString() {
-        return "Section{" +
+        return "Section_[" +
                 "point1=" + point1 +
                 ", point2=" + point2 +
                 ", distance=" + distance +
                 ", cost=" + cost +
-                '}';
+                ']';
     }
 }

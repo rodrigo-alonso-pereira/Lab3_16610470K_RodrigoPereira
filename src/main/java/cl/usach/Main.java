@@ -1,24 +1,9 @@
 package cl.usach;
 
-import cl.usach.Model.*;
-import cl.usach.Service.LineServiceImpl;
-import cl.usach.Service.TrainServiceImpl;
-import cl.usach.Util.Utililty;
 import cl.usach.Vista.Menu;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Scanner;
-
-import static cl.usach.Model.StationType.*;
-import static cl.usach.Model.CarType.*;
-
 public class Main {
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) {
         /*
         // Datos station
         Station st0 = new Station(0, "San Alberto Hurtado", StationType.TERMINAL, 35);

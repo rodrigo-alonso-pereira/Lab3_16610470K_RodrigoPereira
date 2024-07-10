@@ -1,5 +1,6 @@
 package cl.usach.Model;
 
+import cl.usach.Model.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -95,18 +96,18 @@ public class Line {
 
     /**
      *
-     * @param StationName1
-     * @param StationName2
+     * @param stationName1
+     * @param stationName2
      * @return
      */
-    public double lineSectionLength(String StationName1, String StationName2) {
+    public double lineSectionLength(String stationName1, String stationName2) {
         var flag = false;
         var distance = 0.0;
         for (Section section : sections) {
-            if (Objects.equals(section.getPoint2().getName(), StationName2)) {
+            if (Objects.equals(section.getPoint2().getName(), stationName2)) {
                 flag = false;
                 distance += section.getDistance();
-            } else if (Objects.equals(section.getPoint1().getName(), StationName1) || flag) {
+            } else if (Objects.equals(section.getPoint1().getName(), stationName1) || flag) {
                 flag = true;
                 distance += section.getDistance();
             }
