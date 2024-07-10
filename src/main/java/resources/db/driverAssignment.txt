@@ -1,6 +1,0 @@
-t1,d1,date1,10,8
-t1,d1,date1,0,8
-t5,d3,date2,2,7
-t3,d0,date3,20,23
-t4,d4,date4,10,13
-t5,d2,date5,10,13
