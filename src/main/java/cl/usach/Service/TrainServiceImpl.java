@@ -15,10 +15,12 @@ public class TrainServiceImpl implements TrainService {
      * @param train
      * @param position
      */
-    // TODO: Verificar que position exista antes de eliminar
     @Override
     public void removeCar(Train train, int position) {
-        train.getCarList().remove(position);
+        if (train.getCarList().size() >= position)
+            train.getCarList().remove(position);
+        else
+            System.out.println("[removeCar] La posicion elejida [" + position + "] no es valida");
     }
 
     /**

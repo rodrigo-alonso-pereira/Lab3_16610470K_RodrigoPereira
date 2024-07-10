@@ -153,7 +153,7 @@ public class Main {
 
         DateFormat sdf = new SimpleDateFormat("hh:mm aa");
         Date date1 = sdf.parse("01:30 pm");
-        Date date2 = sdf.parse("09:00 am");
+        Date date2 = sdf.parse(" ");
         Date date3 = sdf.parse("02:00 pm");
         Date date4 = sdf.parse("06:00 am");
         Date date5 = sdf.parse("10:00 pm");

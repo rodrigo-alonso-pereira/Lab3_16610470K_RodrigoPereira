@@ -3,6 +3,7 @@ package cl.usach.Vista;
 import cl.usach.Model.*;
 import cl.usach.Repository.TxtRepository;
 import cl.usach.Service.LineServiceImpl;
+import cl.usach.Service.TrainServiceImpl;
 import cl.usach.Util.Utililty;
 
 import java.text.DateFormat;
@@ -16,6 +17,7 @@ public class Menu {
     static Utililty util = new Utililty();
     static TxtRepository txtRepository = new TxtRepository();
     static LineServiceImpl lineService = new LineServiceImpl();
+    static TrainServiceImpl trainService = new TrainServiceImpl();
     static Subway subway;
     static ArrayList<Station> stationList = new ArrayList<>();
     static ArrayList<Section> sectionList = new ArrayList<>();
@@ -184,7 +186,11 @@ public class Menu {
                         try {
                             int lineId;
                             System.out.println("\n---------------LARGO LINEA----------------\n");
-                            System.out.print("Ingresa el id (number) de la linea que desea consultar su largo: ");
+                            System.out.println("Lista de Lineas disponibles:");
+                            for (Line line : subway.getLines()) {
+                                System.out.println("-> " + line.toString());
+                            }
+                            System.out.print("\nIngresa el id (number) de la linea que desea consultar su largo: ");
                             lineId = inputI.nextInt();
                             Line line = util.findLine(subway, lineId);
                             if (line != null)
@@ -201,7 +207,11 @@ public class Menu {
                             String station1Name = "";
                             String station2Name = "";
                             System.out.println("\n---------------LARGO LINEA ENTRE ESTACIONES----------------\n");
-                            System.out.print("Ingresa el nombre de la estacion inicial: ");
+                            System.out.println("Lista de Lineas disponibles:");
+                            for (Line line : subway.getLines()) {
+                                System.out.println("-> " + line.toString());
+                            }
+                            System.out.print("\nIngresa el nombre de la estacion inicial: ");
                             station1Name = inputS.nextLine().trim();
                             System.out.print("\nIngresa el nombre de la estacion final: ");
                             station2Name = inputS.nextLine().trim();
@@ -217,7 +227,11 @@ public class Menu {
                         try {
                             int lineId;
                             System.out.println("\n---------------COSTO LINEA----------------\n");
-                            System.out.print("Ingresa el id (number) de la linea que desea consultar su cost: ");
+                            System.out.println("Lista de Lineas disponibles:");
+                            for (Line line : subway.getLines()) {
+                                System.out.println("-> " + line.toString());
+                            }
+                            System.out.print("\nIngresa el id (number) de la linea que desea consultar su costo: ");
                             lineId = inputI.nextInt();
                             Line line = util.findLine(subway, lineId);
                             if (line != null)
@@ -234,7 +248,11 @@ public class Menu {
                             String station1Name = "";
                             String station2Name = "";
                             System.out.println("\n---------------COSTO LINEA ENTRE ESTACIONES----------------\n");
-                            System.out.print("Ingresa el nombre de la estacion inicial: ");
+                            System.out.println("Lista de Lineas disponibles:");
+                            for (Line line : subway.getLines()) {
+                                System.out.println("-> " + line.toString());
+                            }
+                            System.out.print("\nIngresa el nombre de la estacion inicial: ");
                             station1Name = inputS.nextLine().trim();
                             System.out.print("\nIngresa el nombre de la estacion final: ");
                             station2Name = inputS.nextLine().trim();
@@ -250,7 +268,11 @@ public class Menu {
                         try {
                             int lineId;
                             System.out.println("\n---------------¿ES LINEA?----------------\n");
-                            System.out.print("Ingresa el id (number) de la linea que desea evaluar: ");
+                            System.out.println("Lista de Lineas disponibles:");
+                            for (Line line : subway.getLines()) {
+                                System.out.println("-> " + line.toString());
+                            }
+                            System.out.print("\nIngresa el id (number) de la linea que desea evaluar: ");
                             lineId = inputI.nextInt();
                             Line line = util.findLine(subway, lineId);
                             if (line != null)
@@ -294,20 +316,105 @@ public class Menu {
                             } else
                                 System.out.println("Vuelva a intentarlo");
                         } catch (Exception e) {
-                            System.out.println("[opcion3.lineCost] error: " + e.getMessage());
+                            System.out.println("[opcion3.addCar] error: " + e.getMessage());
                         }
                         break;
                     case 7:
-                        System.out.println("Seleccion opcion 7");
+                        try {
+                            int trainId;
+                            int position;
+                            System.out.println("\n---------------REMOVER CARRO A TREN----------------\n");
+
+                            System.out.println("Lista de Trenes disponibles:");
+                            for (Train train : trainList) {
+                                System.out.println("-> " + train.toString());
+                            }
+                            System.out.print("\nIngresa el id (number) del tren al cual desea remocer el carro: ");
+                            trainId = inputI.nextInt();
+                            Train train = util.findTrain(subway, trainId);
+
+                            System.out.print("\nIngrese la posicion donde desea eliminar el carro: ");
+                            position = inputI.nextInt();
+
+                            if (train != null) {
+                                trainService.removeCar(train, position);
+                                System.out.println("Se elimino con exito el carro en la posicion [" + position + "]"
+                                        + " a el tren de id=" + trainId);
+                            } else
+                                System.out.println("Vuelva a intentarlo");
+                        } catch (Exception e) {
+                            System.out.println("[opcion3.removeCar] error: " + e.getMessage());
+                        }
                         break;
                     case 8:
-                        System.out.println("Seleccion opcion 8");
+                        try {
+                            int trainId;
+                            System.out.println("\n---------------¿ES TREN?----------------\n");
+                            System.out.println("Lista de Trenes disponibles:");
+                            for (Train train : trainList) {
+                                System.out.println("-> " + train.toString());
+                            }
+                            System.out.print("\nIngresa el id (number) del tren que desea evaluar: ");
+                            trainId = inputI.nextInt();
+                            Train train = util.findTrain(subway, trainId);
+                            if (train != null)
+                                // trainId = 0, true
+                                System.out.println("El tren de id=" + trainId + (trainService.isTrain(train)? " es un tren valido" : " no es un tren valido"));
+                            else
+                                System.out.println("Vuelva a intentarlo");
+                        } catch (Exception e) {
+                            System.out.println("[opcion3.isTrain] error: " + e.getMessage());
+                        }
                         break;
                     case 9:
-                        System.out.println("Seleccion opcion 9");
+                        try {
+                            int trainId;
+                            System.out.println("\n---------------CAPACIDAD DEL TREN----------------\n");
+                            System.out.println("Lista de Trenes disponibles:");
+                            for (Train train : trainList) {
+                                System.out.println("-> " + train.toString());
+                            }
+                            System.out.print("\nIngresa el id (number) del tren que desea obtener su capacidad: ");
+                            trainId = inputI.nextInt();
+                            Train train = util.findTrain(subway, trainId);
+                            if (train != null)
+                                // trainId = 0 -> capacidad = 530
+                                System.out.println("El tren de id=" + trainId + " tiene una capacidad total de: " + train.fetchCapacity() + " pasajeros");
+                            else
+                                System.out.println("Vuelva a intentarlo");
+                        } catch (Exception e) {
+                            System.out.println("[opcion3.fetchCapacity] error: " + e.getMessage());
+                        }
                         break;
                     case 10:
-                        System.out.println("Seleccion opcion 10");
+                        try {
+                            int trainId;
+                            String date;
+                            System.out.println("\n---------------¿DONDE ESTA EL TREN?----------------\n");
+                            System.out.println("Lista de Trenes disponibles:");
+                            for (Train train : trainList) {
+                                System.out.println("-> " + train.toString());
+                            }
+                            System.out.print("\nIngresa el id (number) del tren que desea saber su ubicacion: ");
+                            trainId = inputI.nextInt();
+                            var flag = true;
+
+                            do {
+                                System.out.print("\nIngresa la hora de consulta (en formato [hh:mm am/pm] 0 <= hh <= 12) " +
+                                        "para el tren de id=" + trainId + " : ");
+                                date = inputS.nextLine();
+                                if (util.isValidTimeFormat(date)) {
+                                    flag = false;
+                                } else {
+                                    System.out.println("Fecha ingresada "+ date + " no valida, vuelva a intentarlo");
+                                }
+                            } while (flag);
+                            Date dateFormat = sdf.parse(date);
+                            //trainId = 1 , hora = 01:40 pm -> Republica
+                            System.out.println(subway.whereIsTrain(trainId, dateFormat));
+                        } catch (Exception e) {
+                            System.out.println("[opcion3.fetchCapacity] error: " + e.getMessage());
+                        }
                         break;
                     case 11:
                         System.out.println("Seleccion opcion 11");

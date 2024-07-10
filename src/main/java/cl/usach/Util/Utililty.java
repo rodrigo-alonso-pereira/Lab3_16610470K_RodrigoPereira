@@ -3,6 +3,8 @@ package cl.usach.Util;
 import cl.usach.Model.*;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -257,6 +259,16 @@ public class Utililty {
         } else
             System.out.println("[findPassengerCar] PassengerCar de id=" + passengerCarId + " no encontrado");
         return null;
+    }
+
+    public boolean isValidTimeFormat(String date) {
+        // Expresión regular para validar el formato "hh:mm am/pm"
+        String timePattern = "^(0[0-9]|1[0-2]):([0-5][0-9])\\s?(am|pm)$";
+
+        Pattern pattern = Pattern.compile(timePattern, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(date);
+
+        return matcher.matches(); // true si coincido, false si no
     }
 
 

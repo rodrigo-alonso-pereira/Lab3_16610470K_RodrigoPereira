@@ -320,7 +320,7 @@ public class Subway {
     }
 
     public String whereIsTrain(int idTrain, Date time) {
-        var iAmHere = "No se donde estoy =(";
+        var iAmHere = "";
         var lineName = "";
         try {
             // Evalua que line exista en subway
@@ -334,9 +334,9 @@ public class Subway {
             if (lineName == null) {
                 System.out.println("La linea no tiene nombre asignado");
             } else if (currentStation == null) {
-                System.out.println("No se pudo encontrar la estacion donde va el tren");
+                System.out.println("No se pudo saber la ubicacion del tren de id=" + idTrain);
             } else {
-                iAmHere = "El tren va en la estacion '" + currentStation.getName() + "' de la linea " + lineName;
+                iAmHere = "El tren de id=" + idTrain + " va en la estacion '" + currentStation.getName() + "' de '" + lineName + "'";
             }
 
         } catch (Exception e) {
@@ -367,7 +367,7 @@ public class Subway {
             } else if (sectionList == null) {
                 System.out.println("La linea no tiene secciones asignadas");
             } else if (util.getTotalTime(verifiedTrain.getDriverAssignment().getDepartureTime(), time) == 0) {
-                System.out.println("Ingrese de forma correcta el tiempo a consultar");
+                System.out.println("La hora consultada es anterior a la hora de salida del tren");
             } else { // Si paso las verificaciones entrega la station
                 long totalTime = util.getTotalTime(verifiedTrain.getDriverAssignment().getDepartureTime(), time);
                 return util.trainMove(sectionList, totalTime, verifiedTrain);
