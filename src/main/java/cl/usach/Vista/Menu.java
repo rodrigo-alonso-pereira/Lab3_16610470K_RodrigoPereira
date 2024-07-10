@@ -204,8 +204,8 @@ public class Menu {
                         break;
                     case 2:
                         try {
-                            String station1Name = "";
-                            String station2Name = "";
+                            String station1Name;
+                            String station2Name;
                             System.out.println("\n---------------LARGO LINEA ENTRE ESTACIONES----------------\n");
                             System.out.println("Lista de Lineas disponibles:");
                             for (Line line : subway.getLines()) {
@@ -245,8 +245,8 @@ public class Menu {
                         break;
                     case 4:
                         try {
-                            String station1Name = "";
-                            String station2Name = "";
+                            String station1Name;
+                            String station2Name;
                             System.out.println("\n---------------COSTO LINEA ENTRE ESTACIONES----------------\n");
                             System.out.println("Lista de Lineas disponibles:");
                             for (Line line : subway.getLines()) {

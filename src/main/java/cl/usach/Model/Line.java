@@ -1,6 +1,5 @@
 package cl.usach.Model;
 
-import cl.usach.Model.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -58,10 +57,6 @@ public class Line {
 
     public ArrayList<Train> getTrains() {
         return trains;
-    }
-
-    public void setTrains(ArrayList<Train> trains) {
-        this.trains = trains;
     }
 
     public void addTrain(Train train) {

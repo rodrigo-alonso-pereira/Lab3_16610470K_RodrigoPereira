@@ -37,32 +37,16 @@ public class Subway {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public List<Line> getLines() {
         return lines;
-    }
-
-    public void setLines(List<Line> lines) {
-        this.lines = lines;
     }
 
     public List<Train> getTrains() {
         return trains;
     }
 
-    public void setTrains(List<Train> trains) {
-        this.trains = trains;
-    }
-
     public List<Driver> getDrivers() {
         return drivers;
-    }
-
-    public void setDrivers(List<Driver> drivers) {
-        this.drivers = drivers;
     }
 
     // Metodos propios de Subway

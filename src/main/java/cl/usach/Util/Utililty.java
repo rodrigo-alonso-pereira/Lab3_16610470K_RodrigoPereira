@@ -77,10 +77,11 @@ public class Utililty {
 
     public String stationToString(Station station) {
         return "[" +
-                "id=" + String.valueOf(station.getId()) +
+                "id=" + station.getId() +
                 ", name=" + station.getName() +
                 ", stationType=" + station.getStationType() +
-                ", stopTime=" + String.valueOf(station.getStopTime()) + "]";
+                ", stopTime=" + station.getStopTime() +
+                "]";
     }
 
     public String sectionToString(Section section) {
