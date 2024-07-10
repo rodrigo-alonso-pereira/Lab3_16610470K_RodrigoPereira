@@ -184,14 +184,14 @@ public class Utililty {
 
     public Station trainMove(List<Section> sectionList, Long totalTime, Train train) {
         for (Section section : sectionList) {
-            System.out.println("totalTime en station " + section.getPoint1().getName() + ": " + totalTime + " sec");
+            //System.out.println("totalTime en station " + section.getPoint1().getName() + ": " + totalTime + " sec");
             if (totalTime >= section.getPoint1().getStopTime()) { // Evaluar que tiempo total sea mayor que tiempo en estacion
                 totalTime -= section.getPoint1().getStopTime(); // Restar tiempo de espera en estacion
-                System.out.println("totalTime despues de esperar " + section.getPoint1().getStopTime() + " sec en station " + section.getPoint1().getName() + ": " + totalTime + " sec");
+                //System.out.println("totalTime despues de esperar " + section.getPoint1().getStopTime() + " sec en station " + section.getPoint1().getName() + ": " + totalTime + " sec");
                 var timeNextStation = (section.getDistance() * 1000) / speedToMs(train.getSpeed()); // Calcular tiempo proxima estacion
                 if (totalTime >= timeNextStation) { // Evaluar que el tiempo total sea mayor que tiempo de avance a siguiente estacion
                     totalTime -= (long) timeNextStation; // Restar tiempo de espera en estacion
-                    System.out.println("totalTime despues de demorar " + timeNextStation + " sec en avanzar a station " + section.getPoint2().getName() + ": " + totalTime + " sec");
+                    //System.out.println("totalTime despues de demorar " + timeNextStation + " sec en avanzar a station " + section.getPoint2().getName() + ": " + totalTime + " sec");
                 } else
                     return section.getPoint1();
             } else

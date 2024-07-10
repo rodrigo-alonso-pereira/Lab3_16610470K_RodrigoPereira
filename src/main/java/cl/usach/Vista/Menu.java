@@ -413,11 +413,41 @@ public class Menu {
                             //trainId = 1 , hora = 01:40 pm -> Republica
                             System.out.println(subway.whereIsTrain(trainId, dateFormat));
                         } catch (Exception e) {
-                            System.out.println("[opcion3.fetchCapacity] error: " + e.getMessage());
+                            System.out.println("[opcion3.whereIsTrain] error: " + e.getMessage());
                         }
                         break;
                     case 11:
-                        System.out.println("Seleccion opcion 11");
+                        try {
+                            int trainId;
+                            String date;
+                            System.out.println("\n---------------¿CUAL ES EL CAMINO FUTURO DEL TREN?----------------\n");
+                            System.out.println("Lista de Trenes disponibles:");
+                            for (Train train : trainList) {
+                                System.out.println("-> " + train.toString());
+                            }
+                            System.out.print("\nIngresa el id (number) del tren que desea saber su ubicacion: ");
+                            trainId = inputI.nextInt();
+                            var flag = true;
+
+                            do {
+                                System.out.print("\nIngresa la hora de consulta (en formato [hh:mm am/pm] 0 <= hh <= 12) " +
+                                        "para el tren de id=" + trainId + " : ");
+                                date = inputS.nextLine();
+                                if (util.isValidTimeFormat(date)) {
+                                    flag = false;
+                                } else {
+                                    System.out.println("Fecha ingresada "+ date + " no valida, vuelva a intentarlo");
+                                }
+                            } while (flag);
+                            Date dateFormat = sdf.parse(date);
+                            //trainId = 1 , hora = 01:40 pm -> Republica
+                            System.out.println("Las estaciones que tiene que recorrer el tren de id=" + trainId + " desde las " + date + " son:");
+                            for (Station station : subway.trainPath(trainId, dateFormat)) {
+                                System.out.print(" -> " + station.getName());
+                            }
+                        } catch (Exception e) {
+                            System.out.println("[opcion3.trainPath] error: " + e.getMessage());
+                        }
                         break;
                     case 12:
                         System.out.println("\nVolviendo a menu general...\n");
