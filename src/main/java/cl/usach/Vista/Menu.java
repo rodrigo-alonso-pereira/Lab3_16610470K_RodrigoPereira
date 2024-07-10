@@ -25,8 +25,8 @@ public class Menu {
 
     // Metodos propios de menu
     public static void iniciarMenu() {
+        Scanner input = new Scanner(System.in);
         try {
-            Scanner input = new Scanner(System.in);
             final int MENU_EXIT_OPTION = 5;
             int choice;
             do {
@@ -38,7 +38,7 @@ public class Menu {
                     case 2:
                         menuCase2();
                     case 3:
-                        printSpecificMenu3();
+                        menuCase3();
                     case 4:
                         System.out.println("\nSaliendo de la red de metro... adios!\n");
                         System.exit(0);
@@ -49,11 +49,12 @@ public class Menu {
         } catch (Exception e) {
             System.out.println("[iniciarMenu] error: " + e.getMessage());
         }
+        input.close();
     }
 
     private static void menuCase1() {
+        Scanner input = new Scanner(System.in);
         try {
-            Scanner input = new Scanner(System.in);
             int choiceCase1;
             do {
                 printSpecificMenu1();
@@ -140,11 +141,12 @@ public class Menu {
         } catch (Exception e) {
             System.out.println("[iniciarMenu] error: " + e.getMessage());
         }
+        input.close();
     }
 
     private static void menuCase2() {
+        Scanner input = new Scanner(System.in);
         try {
-            Scanner input = new Scanner(System.in);
             int choiceCase2;
             do {
                 printSpecificMenu2();
@@ -164,6 +166,104 @@ public class Menu {
         } catch (Exception e) {
             System.out.println("[iniciarMenu] error: " + e.getMessage());
         }
+        input.close();
+    }
+
+    private static void menuCase3() {
+        Scanner input = new Scanner(System.in);
+        Scanner inputS = new Scanner(System.in);
+        try {
+            int choiceCase3;
+            do {
+                printSpecificMenu3();
+                choiceCase3 = input.nextInt();
+                switch (choiceCase3) {
+                    case 1:
+                        try {
+                            int lineId;
+                            System.out.println("\n---------------LARGO LINEA----------------\n");
+                            System.out.print("Ingresa el id (number) de la linea que desea consultar su largo: ");
+                            lineId = input.nextInt();
+                            Line line = util.findLine(subway, lineId);
+                            if (line != null)
+                                // lineId = 1, largo = 18.4
+                                System.out.println("El largo de la linea de id=" + lineId + " es: " + line.lineLength() + " [km]");
+                            else
+                                System.out.println("Vuelva a intentarlo");
+                        } catch (Exception e) {
+                            System.out.println("[opcion3.lineLength] error: " + e.getMessage());
+                        }
+                        break;
+                    case 2:
+                        try {
+                            String station1Name = "";
+                            String station2Name = "";
+                            System.out.println("\n---------------LARGO LINEA ENTRE ESTACIONES----------------\n");
+                            System.out.print("Ingresa el nombre de la estacion inicial: ");
+                            station1Name = inputS.nextLine().trim();
+                            System.out.print("\nIngresa el nombre de la estacion final: ");
+                            station2Name = inputS.nextLine().trim();
+                            Line line = util.findLineByStations(subway, station1Name, station2Name);
+                            // station1Name = USACH, station2Name = La Moneda -> largo = 11.4
+                            System.out.println("El largo de la linea entre la estacion '" + station1Name + "' y estacion '"
+                                    + station2Name + "' es: " + line.lineSectionLength(station1Name, station2Name) + " [km]");
+                        } catch (Exception e) {
+                            System.out.println("[opcion3.lineLength] error: " + e.getMessage());
+                        }
+                        break;
+                    case 3:
+                        try {
+                            int lineId;
+                            System.out.println("\n---------------COSTO LINEA----------------\n");
+                            System.out.print("Ingresa el id (number) de la linea que desea consultar su largo: ");
+                            lineId = input.nextInt();
+                            Line line = util.findLine(subway, lineId);
+                            if (line != null)
+                                // lineId = 1, costo = 335
+                                System.out.println("El costo de la linea de id=" + lineId + " es: " + line.lineCost() + "K USD");
+                            else
+                                System.out.println("Vuelva a intentarlo");
+                        } catch (Exception e) {
+                            System.out.println("[opcion3.lineCost] error: " + e.getMessage());
+                        }
+                        break;
+                    case 4:
+                        System.out.println("Seleccion opcion 4");
+                        break;
+                    case 5:
+                        System.out.println("Seleccion opcion 5");
+                        break;
+                    case 6:
+                        System.out.println("Seleccion opcion 6");
+                        break;
+                    case 7:
+                        System.out.println("Seleccion opcion 7");
+                        break;
+                    case 8:
+                        System.out.println("Seleccion opcion 8");
+                        break;
+                    case 9:
+                        System.out.println("Seleccion opcion 9");
+                        break;
+                    case 10:
+                        System.out.println("Seleccion opcion 10");
+                        break;
+                    case 11:
+                        System.out.println("Seleccion opcion 11");
+                        break;
+                    case 12:
+                        System.out.println("\nVolviendo a menu general...\n");
+                        iniciarMenu();
+                        break;
+                    default:
+                        System.out.println("\n\n\n--------------OPCION NO VALIDA-------------\n");
+                }
+            } while (true);
+        } catch (Exception e) {
+            System.out.println("[iniciarMenu] error: " + e.getMessage());
+        }
+        input.close();
+        inputS.close();
     }
 
     public static void printGeneralMenu() {
@@ -215,6 +315,7 @@ public class Menu {
         System.out.println("10. Subway - whereIsTrain: determina la ubicación de un tren a partir de una hora indicada del día.");
         System.out.println("11. Subway - trainPath: armar el recorrido del tren a partir de una hora especificada y que " +
                 "retorna la lista de estaciones futuras por recorrer.");
+        System.out.println("12. Retorno al menú de Inicio");
         System.out.print("\nIngrese su opcion: ");
     }
 }

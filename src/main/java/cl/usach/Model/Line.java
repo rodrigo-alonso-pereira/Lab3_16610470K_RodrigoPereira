@@ -87,8 +87,12 @@ public class Line {
      */
     public double lineLength() {
         double length = 0;
-        for (Section section : sections) {
-            length += section.getDistance();
+        try {
+            for (Section section : sections) {
+                length += section.getDistance();
+            }
+        } catch (Exception e) {
+            System.out.println("[lineLength] error: " + e.getMessage());
         }
         return length;
     }

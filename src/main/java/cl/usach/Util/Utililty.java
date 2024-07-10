@@ -177,7 +177,7 @@ public class Utililty {
         if (start.after(end)) // Verifica que Date end este despues de Date start
             return 0;
         else
-            return (end.getTime() - start.getTime())/1000;
+            return (end.getTime() - start.getTime()) / 1000;
     }
 
     public Station trainMove(List<Section> sectionList, Long totalTime, Train train) {
@@ -188,7 +188,7 @@ public class Utililty {
                 System.out.println("totalTime despues de esperar " + section.getPoint1().getStopTime() + " sec en station " + section.getPoint1().getName() + ": " + totalTime + " sec");
                 var timeNextStation = (section.getDistance() * 1000) / speedToMs(train.getSpeed()); // Calcular tiempo proxima estacion
                 if (totalTime >= timeNextStation) { // Evaluar que el tiempo total sea mayor que tiempo de avance a siguiente estacion
-                    totalTime -= (long)timeNextStation; // Restar tiempo de espera en estacion
+                    totalTime -= (long) timeNextStation; // Restar tiempo de espera en estacion
                     System.out.println("totalTime despues de demorar " + timeNextStation + " sec en avanzar a station " + section.getPoint2().getName() + ": " + totalTime + " sec");
                 } else
                     return section.getPoint1();
@@ -196,7 +196,7 @@ public class Utililty {
                 return section.getPoint1();
 
         }
-        return sectionList.get(sectionList.size()-1).getPoint2(); // Si termino y queda tiempo, retorna estacion final de linea
+        return sectionList.get(sectionList.size() - 1).getPoint2(); // Si termino y queda tiempo, retorna estacion final de linea
     }
 
     public Station findStation(List<Station> stations, int stationId) {
@@ -226,6 +226,21 @@ public class Utililty {
         return null;
     }
 
+    public Line findLineByStations(Subway subway, String stationName1, String stationName2) {
+        for (Line line : subway.getLines()) {
+            for (Section section : line.getSections()) {
+                if (Objects.equals(section.getPoint1().getName(), stationName1) || Objects.equals(section.getPoint2().getName(), stationName1)) {
+                    for (Section section2 : line.getSections()) {
+                        if (Objects.equals(section2.getPoint1().getName(), stationName2) || Objects.equals(section2.getPoint2().getName(), stationName2))
+                            return line;
+                    }
+                }
+            }
+        }
+        System.out.println("[findLineByStation] No se encontraron estaciones con nombre '" + stationName1 + "' y '" + stationName2 + "' en ninguna linea asignada a subway '" + subway.getName() + "'" );
+        return null;
+    }
+
     public Driver findriver(Subway subway, int driverId) {
         Driver driver = subway.getDrivers().stream().filter(e -> e.getId() == driverId).findFirst().orElse(null);
         if (driver != null) {
@@ -234,7 +249,6 @@ public class Utililty {
             System.out.println("[findLine] Line de id=" + driverId + " no encontrado");
         return null;
     }
-
 
 
 }
