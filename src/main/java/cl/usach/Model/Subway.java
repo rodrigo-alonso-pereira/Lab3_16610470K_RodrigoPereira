@@ -19,9 +19,6 @@ public class Subway {
     private List<Train> trains;
     private List<Driver> drivers;
 
-    public Subway() {
-    }
-
     public Subway(int id, String name) {
         this.id = id;
         this.name = name;
@@ -30,9 +27,7 @@ public class Subway {
         this.drivers = new ArrayList<>();
     }
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id;}
 
     public void setId(int id) {
         this.id = id;
@@ -116,7 +111,7 @@ public class Subway {
      */
     public void addLine(List<Line> lineList) {
         try {
-            List<Integer> idLineList = lines.stream().flatMap(e -> Stream.of(e.getId())).collect(Collectors.toList());
+            List<Integer> idLineList = lines.stream().flatMap(e -> Stream.of(e.getId())).collect(Collectors.toList()); // Obtiene id de lineas ya agregas a subway
             for (Line line : lineList) {
                 idLineList.add(line.getId());
                 if (lineService.isLine(line) && util.isRepeatElement(idLineList)) {
@@ -224,6 +219,16 @@ public class Subway {
                 "lines = [" + '\n' + lineString + "],\n" +
                 "trains = [" + '\n' + trainString + "],\n" +
                 "drivers = [" + '\n' + driverString + "]\n";
+    }
+
+    public String toString2() {
+        return "Subway{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lines=" + lines +
+                ", trains=" + trains +
+                ", drivers=" + drivers +
+                '}';
     }
 
     /**

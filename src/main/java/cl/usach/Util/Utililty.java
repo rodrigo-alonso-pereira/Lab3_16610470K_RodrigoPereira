@@ -92,11 +92,16 @@ public class Utililty {
     public String lineToString(Line line) {
         String sectionsString = "";
         String trainsString = "";
-        for (Section section : line.getSections()) {
-            sectionsString = sectionsString.concat(sectionToString(section));
+        if (line.getSections() != null) {
+            for (Section section : line.getSections()) {
+                sectionsString = sectionsString.concat(sectionToString(section));
+            }
         }
-        for (Train train : line.getTrains()) {
-            trainsString = trainsString.concat(trainToString(train));
+
+        if (line.getTrains() != null) {
+            for (Train train : line.getTrains()) {
+                trainsString = trainsString.concat(trainToString(train));
+            }
         }
 
         return " [id = " + line.getId() +

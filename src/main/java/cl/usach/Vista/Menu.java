@@ -63,7 +63,8 @@ public class Menu {
                         subway.addLine(lineList);
                         break;
                     case 2:
-                        System.out.println("Se seleccion opcion 2");
+                        lineList.addAll(txtRepository.importCombinationLine());
+                        subway.addLine(txtRepository.importCombinationLine());
                         break;
                     case 3:
                         System.out.println("Se seleccion opcion 3");

@@ -12,4 +12,5 @@ public abstract class Repository {
     public abstract ArrayList<Station> importStation();
     public abstract ArrayList<Section> importSection();
     public abstract ArrayList<Line> importLine ();
+    public abstract ArrayList<Line> importCombinationLine ();
 }
