@@ -8,6 +8,9 @@ public class PassengerCar {
     private String trainMaker;
     private CarType carType;
 
+    public PassengerCar() {
+    }
+
     public PassengerCar(int id, int passengerCapacity, String model, String trainMaker, CarType carType) {
         this.id = id;
         this.passengerCapacity = passengerCapacity;
