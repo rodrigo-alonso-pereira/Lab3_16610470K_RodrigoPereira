@@ -12,6 +12,9 @@ public class Train {
     private ArrayList<PassengerCar> carList;
     private DriverAssignment driverAssignment;
 
+    public Train() {
+    }
+
     public Train(int id, String trainMaker, int speed, int stationStayTime, ArrayList<PassengerCar> carList) {
         this.id = id;
         this.trainMaker = trainMaker;
