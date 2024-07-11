@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TrainServiceImpl implements TrainService {
-    Utililty util = new Utililty();
+    private Utililty util = new Utililty();
 
     /**
      *
