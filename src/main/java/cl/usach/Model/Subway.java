@@ -18,6 +18,9 @@ public class Subway {
     private List<Line> lines;
     private List<Train> trains;
     private List<Driver> drivers;
+    private TrainServiceImpl trainService = new TrainServiceImpl();
+    private LineServiceImpl lineService = new LineServiceImpl();
+    private Utililty util = new Utililty();
 
     public Subway(int id, String name) {
         this.id = id;
@@ -50,10 +53,6 @@ public class Subway {
     }
 
     // Metodos propios de Subway
-    TrainServiceImpl trainService = new TrainServiceImpl();
-    LineServiceImpl lineService = new LineServiceImpl();
-    Utililty util = new Utililty();
-
     /**
      * @param trainList
      */
@@ -131,12 +130,12 @@ public class Subway {
     }
 
     /**
-     * @param driver
+     * @param driverList
      */
-    public void addDriver(List<Driver> driver) {
+    public void addDriver(List<Driver> driverList) {
         try {
             List<Integer> idDriverList = drivers.stream().flatMap(e -> Stream.of(e.getId())).collect(Collectors.toList());
-            for (Driver d : driver) {
+            for (Driver d : driverList) {
                 idDriverList.add(d.getId());
                 if (util.isRepeatElement(idDriverList)) {
                     drivers.add(d);

@@ -464,7 +464,7 @@ public class Menu {
         inputS.close();
     }
 
-    public static void printGeneralMenu() {
+    private static void printGeneralMenu() {
         System.out.println("\n\n### Sistema Metro - Inicio ###");
         System.out.println("------------------------------");
         System.out.println("\nOpciones de creación de la red de metro y simulación de ejecución");
@@ -475,7 +475,7 @@ public class Menu {
         System.out.print("\nIngrese su opcion: ");
     }
 
-    public static void printSpecificMenu1() {
+    private static void printSpecificMenu1() {
         System.out.println("\n\n### Sistema Metro - Cargar información del sistema de metro ###");
         System.out.println("---------------------------------------------------------------");
         System.out.println("\nDefiniciones estructurales de su sistema subido desde archivos");
@@ -487,7 +487,7 @@ public class Menu {
         System.out.print("\nIngrese su opcion: ");
     }
 
-    public static void printSpecificMenu2() {
+    private static void printSpecificMenu2() {
         System.out.println("\n\n### Sistema Metro - Visualización del estado actual del sistema de metros ###");
         System.out.println("-----------------------------------------------------------------------------");
         System.out.println("\nDefiniciones estructurales de su sistema subido desde archivos");
@@ -496,7 +496,7 @@ public class Menu {
         System.out.print("\nIngrese su opcion: ");
     }
 
-    public static void printSpecificMenu3() {
+    private static void printSpecificMenu3() {
         System.out.println("\n\n### Sistema Metro - Interactuar con el sistema de metros ###");
         System.out.println("------------------------------------------------------------");
         System.out.println("\nA través de las siguientes opciones usted puede interactuar con la red de metros " +

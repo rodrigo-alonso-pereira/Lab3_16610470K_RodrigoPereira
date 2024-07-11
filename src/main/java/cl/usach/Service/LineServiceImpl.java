@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 public class LineServiceImpl implements LineService {
 
-    Utililty util = new Utililty();
+    private Utililty util = new Utililty();
 
     /**
      *
